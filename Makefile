@@ -13,3 +13,6 @@ stop:
 
 shell:
 	@ssh -p 8022 suap@localhost
+
+clone:
+	@git clone git@gitlab.ifmt.edu.br:csn/suap.git src
