@@ -1,0 +1,7 @@
+#
+.bash_history
+.env-dba
+.env-sql
+
+#
+src/

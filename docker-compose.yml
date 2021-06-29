@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  sql:
+    image: postgres:buster
+    env_file:
+      - .env-sql
+    networks:
+      - suap-network
+    ports:
+      - "5432:5432"
+    volumes:
+      - /opt/suap-sql:/var/lib/postgresql/data
+
+  dba:
+    image: dpage/pgadmin4
+    env_file:
+      - .env-dba
+    networks:
+      - suap-network
+    ports:
+      - "8080:80"
+      - "8081:443"
+    depends_on:
+      - sql
+
+  app:
+    build: .
+    volumes:
+      - ./src:/workspace
+    networks:
+      - suap-network
+    ports:
+      - "8022:22"
+    depends_on:
+      - sql
+
+networks:
+  suap-network:
