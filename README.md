@@ -10,6 +10,8 @@ stop: paraliza os containers sql, dba e app
 
 clone: executa um git clone do repositorio suap para dentro da pasta src
 
+shell: acessa via ssh ao container "app"
+
 ## Configurações
 
 Antes de usar o ambiente é necessario que se crie dois arquivos de configuração:
