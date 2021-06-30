@@ -5,22 +5,24 @@ services:
     image: postgres:buster
     env_file:
       - .env-sql
+    volumes:
+      - sql:/var/lib/postgresql/data
     networks:
       - suap-network
     ports:
-      - "5432:5432"
-    volumes:
-      - /opt/suap-sql:/var/lib/postgresql/data
+      - "8032:5432"
 
   dba:
     image: dpage/pgadmin4
     env_file:
       - .env-dba
+    volumes:
+      - dba:/var/lib/pgadmin
     networks:
       - suap-network
     ports:
       - "8080:80"
-      - "8081:443"
+      - "8443:443"
     depends_on:
       - sql
 
@@ -37,3 +39,10 @@ services:
 
 networks:
   suap-network:
+
+volumes:
+  sql:
+    driver: local
+
+  dba:
+    driver: local

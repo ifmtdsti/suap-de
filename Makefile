@@ -1,4 +1,4 @@
-PROJECT := suap
+PROJECT := ifmt
 
 LASTEST := carlosrabelo/suap-dv:latest
 CURRENT := carlosrabelo/suap-dv:18.04
