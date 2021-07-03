@@ -8,7 +8,7 @@ start: inicializa o containers sql, dba e app
 
 stop: paraliza os containers sql, dba e app
 
-clone: executa um git clone do repositorio suap para dentro da pasta src
+init: executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash
 
 shell: acessa via ssh ao container "app"
 

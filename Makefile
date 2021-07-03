@@ -14,5 +14,7 @@ stop:
 shell:
 	@ssh -p 8022 suap@localhost
 
-clone:
+init:
 	@git clone git@gitlab.ifmt.edu.br:csn/suap.git src
+	@cp ./lib/bashrc ./src/.bashrc
+	@cp ./lib/profile ./src/.profile
