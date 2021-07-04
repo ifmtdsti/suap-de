@@ -1,48 +1,71 @@
 version: "3"
 
 services:
-  sql:
-    image: postgres:buster
-    env_file:
-      - .env-sql
-    volumes:
-      - sql:/var/lib/postgresql/data
-    networks:
-      - suap-network
-    ports:
-      - "8032:5432"
 
   dba:
-    image: dpage/pgadmin4
+    image: bitnami/phppgadmin:7.13.0
+    cpu_count: 1
     env_file:
       - .env-dba
     volumes:
-      - dba:/var/lib/pgadmin
+      - dba:/bitnami
+    ports:
+      - "7080:8080"
+      - "7443:8443"
     networks:
       - suap-network
-    ports:
-      - "8080:80"
-      - "8443:443"
-    depends_on:
-      - sql
+
+  lda:
+    image: bitnami/openldap:2
+    cpu_count: 1
+    env_file:
+      - .env-lda
+    volumes:
+      - lda:/bitnami/openldap
+    networks:
+      - suap-network
+
+  sql:
+    cpu_count: 1
+    image: bitnami/postgresql:12
+    env_file:
+      - .env-sql
+    volumes:
+      - sql:/bitnami/postgresql
+    networks:
+      - suap-network
 
   app:
     build: .
     volumes:
       - ./src:/workspace
+    volumes:
+      - app:/workspace/deploy/media/tmp
+    ports:
+      - "8000:8000"
+      - "8022:22"
     networks:
       - suap-network
-    ports:
-      - "8022:22"
     depends_on:
+      - lda
       - sql
+      - dba
 
 networks:
+
   suap-network:
+    driver: bridge
 
 volumes:
+
+  dba:
+    driver: local
+
+  lda:
+    driver: local
+
   sql:
     driver: local
 
-  dba:
+  app:
     driver: local
