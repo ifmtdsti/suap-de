@@ -1,6 +1,9 @@
 #
 .bash_history
+
+#
 .env-dba
+.env-lda
 .env-sql
 
 #
