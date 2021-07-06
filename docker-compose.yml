@@ -4,7 +4,6 @@ services:
 
   dba:
     image: bitnami/phppgadmin:7.13.0
-    cpu_count: 1
     env_file:
       - .env-dba
     volumes:
@@ -17,7 +16,6 @@ services:
 
   lda:
     image: bitnami/openldap:2
-    cpu_count: 1
     env_file:
       - .env-lda
     volumes:
@@ -26,7 +24,6 @@ services:
       - suap-network
 
   sql:
-    cpu_count: 1
     image: bitnami/postgresql:12
     env_file:
       - .env-sql
@@ -38,9 +35,7 @@ services:
   app:
     build: .
     volumes:
-      - ./src:/workspace
-    volumes:
-      - app:/workspace/deploy/media/tmp
+      - app:/workspace
     ports:
       - "8000:8000"
       - "8022:22"
@@ -68,4 +63,7 @@ volumes:
     driver: local
 
   app:
-    driver: local
+    driver_opts: 
+      type: none
+      device: $PWD/src
+      o: bind

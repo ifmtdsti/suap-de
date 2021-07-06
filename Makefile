@@ -11,7 +11,7 @@ start:
 stop:
 	@docker-compose -p $(PROJECT) down
 
-shell:
+ssh:
 	@ssh -p 8022 suap@localhost
 
 init:
