@@ -53,17 +53,26 @@ networks:
 
 volumes:
 
-  dba:
-    driver: local
-
-  lda:
-    driver: local
-
-  sql:
-    driver: local
-
   app:
     driver_opts: 
       type: none
       device: $PWD/src
+      o: bind
+
+  dba:
+    driver_opts: 
+      type: none
+      device: /opt/suap/dba
+      o: bind
+
+  lda:
+    driver_opts: 
+      type: none
+      device: /opt/suap/lda
+      o: bind
+
+  sql:
+    driver_opts: 
+      type: none
+      device: /opt/suap/sql
       o: bind
