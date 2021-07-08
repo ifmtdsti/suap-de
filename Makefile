@@ -11,7 +11,7 @@ clean:
 	@docker volume rm $(PROJECT)_sql
 
 start:
-	@docker-compose -p $(PROJECT) up -d --build
+	@docker-compose -p $(PROJECT) up -d --build --remove-orphans
 
 stop:
 	@docker-compose -p $(PROJECT) down

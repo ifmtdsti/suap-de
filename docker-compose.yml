@@ -23,6 +23,15 @@ services:
     networks:
       - suap-network
 
+  red:
+    image: bitnami/redis:4.0.9
+    env_file:
+      - .env-red
+    volumes:
+      - red:/bitnami/redis/data
+    networks:
+      - suap-network
+
   sql:
     image: bitnami/postgresql:12
     env_file:
@@ -42,9 +51,10 @@ services:
     networks:
       - suap-network
     depends_on:
-      - lda
-      - sql
       - dba
+      - lda
+      - red
+      - sql
 
 networks:
 
@@ -69,6 +79,12 @@ volumes:
     driver_opts: 
       type: none
       device: /opt/suap/lda
+      o: bind
+
+  red:
+    driver_opts: 
+      type: none
+      device: /opt/suap/red
       o: bind
 
   sql:
