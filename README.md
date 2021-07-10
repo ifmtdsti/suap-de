@@ -1,6 +1,6 @@
-# suap-dv
+# suap-pc
 
-Ambiente de desenvolvimento SUAP baseado em Docker
+Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Requisitos
 
