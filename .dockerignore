@@ -1,14 +1,14 @@
-.git
+.git/
+lib/
+src/
+
 .gitignore
-
-.env-dba
-.env-lda
-.env-sql
-
-docker-compose.yml
 Dockerfile
 Makefile
 README.md
+docker-compose.yml
 
-lib
-src
+.env-dba
+.env-lda
+.env-red
+.env-sql

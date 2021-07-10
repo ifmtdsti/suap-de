@@ -12,7 +12,7 @@ services:
       - "7080:8080"
       - "7443:8443"
     networks:
-      - suap-network
+      - app
 
   lda:
     image: bitnami/openldap:2
@@ -21,7 +21,7 @@ services:
     volumes:
       - lda:/bitnami/openldap
     networks:
-      - suap-network
+      - app
 
   red:
     image: bitnami/redis:4.0.9
@@ -30,7 +30,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     networks:
-      - suap-network
+      - app
 
   sql:
     image: bitnami/postgresql:12
@@ -39,17 +39,17 @@ services:
     volumes:
       - sql:/bitnami/postgresql
     networks:
-      - suap-network
+      - app
 
   app:
     build: .
     volumes:
-      - app:/workspace
+      - app:/app
     ports:
       - "8000:8000"
       - "8022:22"
     networks:
-      - suap-network
+      - app
     depends_on:
       - dba
       - lda
@@ -58,37 +58,37 @@ services:
 
 networks:
 
-  suap-network:
+  app:
     driver: bridge
 
 volumes:
 
   app:
-    driver_opts: 
+    driver_opts:
       type: none
-      device: $PWD/src
+      device: ../suap
       o: bind
 
   dba:
-    driver_opts: 
+    driver_opts:
       type: none
       device: /opt/suap/dba
       o: bind
 
   lda:
-    driver_opts: 
+    driver_opts:
       type: none
       device: /opt/suap/lda
       o: bind
 
   red:
-    driver_opts: 
+    driver_opts:
       type: none
       device: /opt/suap/red
       o: bind
 
   sql:
-    driver_opts: 
+    driver_opts:
       type: none
       device: /opt/suap/sql
       o: bind

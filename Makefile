@@ -1,27 +1,28 @@
-PROJECT := ifmt
+PROJECT := suap
 
-LASTEST := carlosrabelo/suap-dv:latest
-CURRENT := carlosrabelo/suap-dv:18.04
+all:
+
+step1:
+	@git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap
+
+step2:
+	@cp ./lib/bashrc ../suap/.bashrc
+	@cp ./lib/profile ../suap/.profile
+
+init: step1 step2
 
 clean:
-	@docker network rm $(PROJECT)_suap-network
 	@docker volume rm $(PROJECT)_app
 	@docker volume rm $(PROJECT)_dba
 	@docker volume rm $(PROJECT)_lda
 	@docker volume rm $(PROJECT)_sql
+	@docker network rm $(PROJECT)_app
 
 start:
 	@docker-compose -p $(PROJECT) up -d --build --remove-orphans
 
 stop:
-	@docker-compose -p $(PROJECT) down
-
-restart: stop start
+	@docker-compose -p $(PROJECT) down --remove-orphans
 
 ssh:
-	@ssh -p 8022 suap@localhost
-
-init:
-	@git clone git@gitlab.ifmt.edu.br:csn/suap.git src
-	@cp ./lib/bashrc ./src/.bashrc
-	@cp ./lib/profile ./src/.profile
+	@ssh -p 8022 ifmt@localhost
