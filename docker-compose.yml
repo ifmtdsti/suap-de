@@ -9,8 +9,7 @@ services:
     volumes:
       - dba:/bitnami
     ports:
-      - "7080:8080"
-      - "7443:8443"
+      - "8080:8080"
     networks:
       - app
 
@@ -63,12 +62,6 @@ networks:
 
 volumes:
 
-  app:
-    driver_opts:
-      type: none
-      device: ../suap
-      o: bind
-
   dba:
     driver_opts:
       type: none
@@ -91,4 +84,10 @@ volumes:
     driver_opts:
       type: none
       device: /opt/suap/sql
+      o: bind
+
+  app:
+    driver_opts:
+      type: none
+      device: ../suap
       o: bind
