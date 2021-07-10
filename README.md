@@ -24,8 +24,8 @@ ssh: acessa via ssh ao container "app"
 Antes de usar o ambiente é necessario que se crie dois arquivos de configuração:
 
 * .env-dba - configuração do phppgadmin
-* .env.lda - configuração do openldap
-* .env.red - configuração do redis
+* .env-lda - configuração do openldap
+* .env-red - configuração do redis
 * .env-sql - configuração do postgres
 
 ### .env-dba
