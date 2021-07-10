@@ -1,6 +1,6 @@
 # suap-dv
 
-Ambiente de desenvolvido SUAP baseado em Docker
+Ambiente de desenvolvimento SUAP baseado em Docker
 
 ## Requisitos
 
@@ -11,11 +11,11 @@ make
 
 ## Targets disponiveis para o make
 
+init: executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash
+
 start: inicializa o containers sql, dba e app
 
 stop: paraliza os containers sql, dba e app
-
-init: executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash
 
 ssh: acessa via ssh ao container "app"
 
@@ -25,6 +25,7 @@ Antes de usar o ambiente é necessario que se crie dois arquivos de configuraç�
 
 * .env-dba - configuração do phppgadmin
 * .env.lda - configuração do openldap
+* .env.red - configuração do redis
 * .env-sql - configuração do postgres
 
 ### .env-dba
@@ -39,12 +40,20 @@ ALLOW_EMPTY_PASSWORD=yes
 ```
 LDAP_ADMIN_USERNAME=admin
 LDAP_ADMIN_PASSWORD=admin
-LDAP_USERS=user
-LDAP_PASSWORDS=password
+LDAP_USERS=user1
+LDAP_PASSWORDS=user1
+```
+
+### .env-red
+
+```
+ALLOW_EMPTY_PASSWORD=yes
 ```
 
 ### .env-sql
 
 ```
 POSTGRESQL_POSTGRES_PASSWORD=postgres
+POSTGRESQL_USERNAME=suap
+POSTGRESQL_PASSWORD=suap
 ```

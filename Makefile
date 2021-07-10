@@ -24,5 +24,7 @@ start:
 stop:
 	@docker-compose -p $(PROJECT) down --remove-orphans
 
+restart: stop start
+
 ssh:
 	@ssh -p 8022 ifmt@localhost
