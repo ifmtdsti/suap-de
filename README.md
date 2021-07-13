@@ -4,20 +4,21 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Requisitos
 
-docker - v20.10.7
-docker-composer - v1.29.2
-git
-make
+| Ferramenta      | Versã o   |
+|-----------------|-----------|
+| docker          | v20.10.7  |
+| docker-composer | v1.29.2   |
+| git             | v2.25.1   |
+| make            | v4.2.1    |
 
 ## Targets disponiveis para o make
 
-init: executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash
-
-start: inicializa o containers sql, dba e app
-
-stop: paraliza os containers sql, dba e app
-
-ssh: acessa via ssh ao container "app"
+| Target | Ação                                       |
+|--------|--------------------------------------------|
+| init   | executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash |
+| start  | inicializa o containers sql, dba e app     |
+| stop   | paraliza os containers sql, dba e app      |
+| ssh    | acessa via ssh ao container "app"          |
 
 ## Configurações
 
