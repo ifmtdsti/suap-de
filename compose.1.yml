@@ -1,0 +1,31 @@
+volumes:
+
+  dba:
+    driver_opts:
+      type: none
+      device: /opt/suap/1/dba
+      o: bind
+
+  lda:
+    driver_opts:
+      type: none
+      device: /opt/suap/1/lda
+      o: bind
+
+  red:
+    driver_opts:
+      type: none
+      device: /opt/suap/1/red
+      o: bind
+
+  sql:
+    driver_opts:
+      type: none
+      device: /opt/suap/1/sql
+      o: bind
+
+  app:
+    driver_opts:
+      type: none
+      device: ../suap
+      o: bind

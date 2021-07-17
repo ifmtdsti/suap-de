@@ -3,13 +3,13 @@ version: "3"
 services:
 
   dba:
-    image: bitnami/phppgadmin:7.13.0
+    image: dpage/pgadmin4
     env_file:
       - .env-dba
     volumes:
-      - dba:/bitnami
+      - dba:/var/lib/pgadmin
     ports:
-      - "8080:8080"
+      - "8080:80"
     networks:
       - app
 
@@ -59,35 +59,3 @@ networks:
 
   app:
     driver: bridge
-
-volumes:
-
-  dba:
-    driver_opts:
-      type: none
-      device: /opt/suap/dba
-      o: bind
-
-  lda:
-    driver_opts:
-      type: none
-      device: /opt/suap/lda
-      o: bind
-
-  red:
-    driver_opts:
-      type: none
-      device: /opt/suap/red
-      o: bind
-
-  sql:
-    driver_opts:
-      type: none
-      device: /opt/suap/sql
-      o: bind
-
-  app:
-    driver_opts:
-      type: none
-      device: ../suap
-      o: bind
