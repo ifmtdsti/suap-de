@@ -1,4 +1,4 @@
-version: "3"
+version: "3.4"
 
 services:
 
@@ -37,6 +37,8 @@ services:
       - .env-sql
     volumes:
       - sql:/bitnami/postgresql
+    ports:
+      - "5432:5432"
     networks:
       - app
 
