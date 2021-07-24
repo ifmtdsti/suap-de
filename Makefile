@@ -15,25 +15,19 @@ init: step1 step2
 
 set1:
 
-	@cp compose.1.yml docker-compose.override.yml
+	@cp docker-compose.1.yml docker-compose.override.yml
 
 set2:
 
-	@cp compose.2.yml docker-compose.override.yml
+	@cp docker-compose.2.yml docker-compose.override.yml
 
-clean1:
-
-	@docker network rm $(PROJECT)_app
-
-clean2:
+clean:
 
 	@docker volume rm $(PROJECT)_dba
 	@docker volume rm $(PROJECT)_lda
 	@docker volume rm $(PROJECT)_red
 	@docker volume rm $(PROJECT)_sql
 	@docker volume rm $(PROJECT)_app
-
-clean: clean2
 
 start:
 

@@ -1,18 +1,17 @@
 .git/
+.gitignore
+
 lib/
 src/
 
-.gitignore
-
+Dockerfile
+Makefile
 README.md
 
-Makefile
-
-Dockerfile
-compose.1.yml
-compose.2.yml
+docker-compose.1.yml
+docker-compose.2.yml
+docker-compose.override.yml
 docker-compose.yml
-docker-compose-override.yml
 
 .env-dba
 .env-lda

@@ -3,47 +3,57 @@ version: "3.4"
 services:
 
   dba:
+    container_name: suap_dba
     image: dpage/pgadmin4
-    env_file:
-      - .env-dba
+    restart: unless-stopped
     volumes:
       - dba:/var/lib/pgadmin
     ports:
       - "8080:80"
     networks:
       - app
+    env_file:
+      - .env-dba
 
   lda:
+    container_name: suap_lda
     image: bitnami/openldap:2
-    env_file:
-      - .env-lda
+    restart: unless-stopped
     volumes:
       - lda:/bitnami/openldap
     networks:
       - app
+    env_file:
+      - .env-lda
 
   red:
+    container_name: suap_red
     image: bitnami/redis:4.0.9
-    env_file:
-      - .env-red
+    restart: unless-stopped
     volumes:
       - red:/bitnami/redis/data
     networks:
       - app
+    env_file:
+      - .env-red
 
   sql:
+    container_name: suap_sql
     image: bitnami/postgresql:12
-    env_file:
-      - .env-sql
+    restart: unless-stopped
     volumes:
       - sql:/bitnami/postgresql
     ports:
       - "5432:5432"
     networks:
       - app
+    env_file:
+      - .env-sql
 
   app:
+    container_name: suap_app
     build: .
+    restart: unless-stopped
     volumes:
       - app:/app
     ports:
