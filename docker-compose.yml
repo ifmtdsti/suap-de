@@ -3,6 +3,7 @@ version: "3.4"
 services:
 
   dba:
+    hostname: dba
     container_name: suap_dba
     image: dpage/pgadmin4
     restart: unless-stopped
@@ -16,6 +17,7 @@ services:
       - .env-dba
 
   lda:
+    hostname: lda
     container_name: suap_lda
     image: bitnami/openldap:2
     restart: unless-stopped
@@ -27,6 +29,7 @@ services:
       - .env-lda
 
   red:
+    hostname: red
     container_name: suap_red
     image: bitnami/redis:4.0.9
     restart: unless-stopped
@@ -38,6 +41,7 @@ services:
       - .env-red
 
   sql:
+    hostname: sql
     container_name: suap_sql
     image: bitnami/postgresql:12
     restart: unless-stopped
@@ -51,6 +55,7 @@ services:
       - .env-sql
 
   app:
+    hostname: app
     container_name: suap_app
     build: .
     restart: unless-stopped

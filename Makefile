@@ -41,4 +41,4 @@ restart: stop start
 
 ssh:
 
-	@ssh -p 8022 ifmt@localhost
+	@ssh -p 8022 dsti@localhost
