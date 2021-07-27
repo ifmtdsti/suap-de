@@ -21,7 +21,15 @@ set2:
 
 	@cp docker-compose.2.yml docker-compose.override.yml
 
-clean:
+dcUP:
+
+	@docker-compose -p $(PROJECT) up -d --build --remove-orphans
+
+dcDW:
+
+	@docker-compose -p $(PROJECT) down --remove-orphans
+
+dcCL:
 
 	@docker volume rm $(PROJECT)_dba
 	@docker volume rm $(PROJECT)_lda
@@ -29,13 +37,9 @@ clean:
 	@docker volume rm $(PROJECT)_sql
 	@docker volume rm $(PROJECT)_app
 
-start:
+start: dcUP
 
-	@docker-compose -p $(PROJECT) up -d --build --remove-orphans
-
-stop:
-
-	@docker-compose -p $(PROJECT) down --remove-orphans
+stop: dcDW dcCL
 
 restart: stop start
 
