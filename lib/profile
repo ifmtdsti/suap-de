@@ -19,3 +19,7 @@ fi
 if [ -d "$HOME/venv" ] ; then
     source venv/bin/activate
 fi
+
+export PGHOST=sql
+export PGUSER=postgres
+export PGPASSWORD=postgres

@@ -45,4 +45,4 @@ restart: stop start
 
 ssh:
 
-	@ssh -p 8022 dsti@localhost
+	@sshpass -pdsti ssh -p 8022 dsti@localhost
