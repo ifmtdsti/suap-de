@@ -2,16 +2,16 @@ PROJECT := suap
 
 all:
 
-step1:
+init1:
 
 	@git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap
 
-step2:
+init2:
 
 	@cp ./lib/bashrc ../suap/.bashrc
 	@cp ./lib/profile ../suap/.profile
 
-init: step1 step2
+init: init1 init2
 
 set1:
 
@@ -46,3 +46,7 @@ restart: stop start
 ssh:
 
 	@sshpass -pdsti ssh -p 8022 dsti@localhost
+
+run:
+
+	sshpass -pdsti ssh -p 8022 dsti@localhost "/app/bin/runserver.sh >&/dev/null &"
