@@ -4,12 +4,13 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Requisitos
 
-| Ferramenta      | Versã o   |
+| Ferramenta      | Versão    |
 |-----------------|-----------|
 | docker          | v20.10.7  |
 | docker-composer | v1.29.2   |
 | git             | v2.25.1   |
 | make            | v4.2.1    |
+| sshpass         | v1.6      |
 
 ## Targets disponiveis para o make
 
