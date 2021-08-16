@@ -49,4 +49,4 @@ ssh:
 
 run:
 
-	sshpass -pdsti ssh -p 8022 dsti@localhost "/app/bin/runserver.sh >&/dev/null &"
+	sshpass -pdsti ssh -p 8022 -o ServerAliveInterval=60  dsti@localhost "/app/bin/runserver.sh >&/dev/null &"
