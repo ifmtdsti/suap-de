@@ -1,30 +1,35 @@
 volumes:
 
   dba:
+    driver: local
     driver_opts:
       type: none
       device: /opt/suap/2/dba
       o: bind
 
   lda:
+    driver: local
     driver_opts:
       type: none
       device: /opt/suap/2/lda
       o: bind
 
   red:
+    driver: local
     driver_opts:
       type: none
       device: /opt/suap/2/red
       o: bind
 
   sql:
+    driver: local
     driver_opts:
       type: none
       device: /opt/suap/2/sql
       o: bind
 
   app:
+    driver: local
     driver_opts:
       type: none
       device: ../suap
