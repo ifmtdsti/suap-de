@@ -1,9 +1,13 @@
 #!/bin/bash
 
-exec >/var/log/suap.log 2>&1
+mkdir -p $HOME/log
+
+exec >/$HOME/log/suap.log 2>&1
 
 source $HOME/env/bin/activate
 
 cd $HOME/app
 
 python manage.py runserver 0.0.0.0:8000
+
+cd $HOME
