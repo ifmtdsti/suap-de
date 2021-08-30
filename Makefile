@@ -58,4 +58,4 @@ ssh:
 
 run:
 
-	sshpass -psuap ssh -p 8022 -o ServerAliveInterval=60 suap@localhost "./runserver.sh &"
+	sshpass -psuap ssh -p 8022 -o ServerAliveInterval=60 suap@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
