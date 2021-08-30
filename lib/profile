@@ -15,11 +15,13 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-#
-if [ -d "$HOME/.venv" ] ; then
-    source .venv/bin/activate
-fi
-
 export PGHOST=sql
 export PGUSER=postgres
 export PGPASSWORD=postgres
+
+#
+if [ -d "$HOME/env" ] ; then
+    source $HOME/env/bin/activate
+    cd $HOME/app
+    export HOME=$HOME/app
+fi

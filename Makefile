@@ -8,10 +8,18 @@ init1:
 
 init2:
 
-	@cp ./lib/bashrc ../suap/.bashrc
-	@cp ./lib/profile ../suap/.profile
+	@cp ~/.ssh/id_rsa.ifmt     opt/.ssh/id_rsa
+	@cp ~/.ssh/id_rsa.ifmt.pub opt/.ssh/id_rsa.pub
 
-init: init1 init2
+init3:
+
+	@cp ./lib/bashrc    opt/.bashrc
+	@cp ./lib/profile   opt/.profile
+	@cp ./lib/runserver opt/runserver.sh
+
+	@chmod +x opt/runserver.sh
+
+init: init1 init2 init3
 
 set1:
 
@@ -36,6 +44,7 @@ dcCL:
 	@docker volume rm $(PROJECT)_red
 	@docker volume rm $(PROJECT)_sql
 	@docker volume rm $(PROJECT)_app
+	@docker volume rm $(PROJECT)_opt
 
 start: dcUP
 
@@ -45,8 +54,8 @@ restart: stop start
 
 ssh:
 
-	@sshpass -pdsti ssh -p 8022 dsti@localhost
+	@sshpass -psuap ssh -p 8022 suap@localhost
 
 run:
 
-	sshpass -pdsti ssh -p 8022 -o ServerAliveInterval=60  dsti@localhost "/app/bin/runserver.sh >&/dev/null &"
+	sshpass -psuap ssh -p 8022 -o ServerAliveInterval=60 suap@localhost "./runserver.sh &"

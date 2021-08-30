@@ -60,7 +60,8 @@ services:
     build: .
     restart: unless-stopped
     volumes:
-      - app:/app
+      - app:/opt/suap/app
+      - opt:/opt/suap
     ports:
       - "8000:8000"
       - "8022:22"
@@ -76,3 +77,19 @@ networks:
 
   app:
     driver: bridge
+
+volumes:
+
+  app:
+    driver: local
+    driver_opts:
+      type: none
+      device: ../suap
+      o: bind
+
+  opt:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./opt
+      o: bind

@@ -27,10 +27,3 @@ volumes:
       type: none
       device: /opt/suap/1/sql
       o: bind
-
-  app:
-    driver: local
-    driver_opts:
-      type: none
-      device: ../suap
-      o: bind

@@ -2,7 +2,7 @@
 .gitignore
 
 lib/
-src/
+opt/
 
 Dockerfile
 Makefile
