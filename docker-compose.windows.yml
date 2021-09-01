@@ -1,0 +1,25 @@
+volumes:
+
+  dba:
+    name: suap_dba
+    driver: local
+    driver_opts:
+      type: none
+      device: ../data/dba
+      o: bind
+
+  red:
+    name: suap_red
+    driver: local
+    driver_opts:
+      type: none
+      device: ../data/red
+      o: bind
+
+  sql:
+    name: suap_sql
+    driver: local
+    driver_opts:
+      type: none
+      device: ../data/sql
+      o: bind

@@ -24,13 +24,17 @@ init4:
 
 init: init1 init2 init3 init4
 
-set1:
+linux1:
 
-	@cp docker-compose.1.yml docker-compose.override.yml
+	@cp docker-compose.linux.1.yml docker-compose.override.yml
 
-set2:
+linux2:
 
-	@cp docker-compose.2.yml docker-compose.override.yml
+	@cp docker-compose.linux.2.yml docker-compose.override.yml
+
+windows:
+
+	@cp docker-compose.windows.yml docker-compose.override.yml
 
 build-suap-app:
 	@docker build . --tag suap_app --force-rm --no-cache
