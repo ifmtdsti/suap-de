@@ -32,7 +32,7 @@ set2:
 
 	@cp docker-compose.2.yml docker-compose.override.yml
 
-build:
+build-suap-app:
 	@docker build . --tag suap_app --force-rm --no-cache
 
 composeUP:
