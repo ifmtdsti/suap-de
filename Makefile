@@ -56,16 +56,16 @@ restart: stop start
 
 ssh:
 
-	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
+	ssh -p 8022 ${USER}@localhost
 
 run:
 
-	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
+	ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
 
-sshx:
+xssh:
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
 
-runx:
+xrun:
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
