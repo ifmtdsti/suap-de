@@ -13,11 +13,8 @@ init2:
 
 init3:
 
-	@cp ./lib/bashrc    opt/.bashrc
-	@cp ./lib/profile   opt/.profile
-	@cp ./lib/runserver opt/runserver.sh
-
-	@chmod +x opt/runserver.sh
+	@cp ./lib/bashrc  opt/.bashrc
+	@cp ./lib/profile opt/.profile
 
 init: init1 init2 init3
 
@@ -39,12 +36,12 @@ dcDW:
 
 dcCL:
 
+	@docker volume rm $(PROJECT)_app
+	@docker volume rm $(PROJECT)_opt
 	@docker volume rm $(PROJECT)_dba
 	@docker volume rm $(PROJECT)_lda
 	@docker volume rm $(PROJECT)_red
 	@docker volume rm $(PROJECT)_sql
-	@docker volume rm $(PROJECT)_app
-	@docker volume rm $(PROJECT)_opt
 
 start: dcUP
 

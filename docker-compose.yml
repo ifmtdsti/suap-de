@@ -2,6 +2,25 @@ version: "3.4"
 
 services:
 
+  app:
+    hostname: app
+    container_name: suap_app
+    build: .
+    restart: unless-stopped
+    volumes:
+      - app:/opt/suap/app
+      - opt:/opt/suap
+    ports:
+      - "8000:8000"
+      - "8022:22"
+    networks:
+      - app
+    depends_on:
+      - dba
+      - lda
+      - red
+      - sql
+
   dba:
     hostname: dba
     container_name: suap_dba
@@ -53,25 +72,6 @@ services:
       - app
     env_file:
       - .env-sql
-
-  app:
-    hostname: app
-    container_name: suap_app
-    build: .
-    restart: unless-stopped
-    volumes:
-      - app:/opt/suap/app
-      - opt:/opt/suap
-    ports:
-      - "8000:8000"
-      - "8022:22"
-    networks:
-      - app
-    depends_on:
-      - dba
-      - lda
-      - red
-      - sql
 
 networks:
 
