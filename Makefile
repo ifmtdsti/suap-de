@@ -30,15 +30,18 @@ build:
 
 linux1:
 
-	@cp compose.1.linux.yml compose.ssh.o.yml
+	@cp compose.ssh.1.linux.yml compose.ssh.o.yml
+	@cp compose.ssh.1.linux.yml docker-compose.override.yml
 
 linux2:
 
-	@cp compose.2.linux.yml compose.ssh.o.yml
+	@cp compose.ssh.2.linux.yml compose.ssh.o.yml
+	@cp compose.ssh.2.linux.yml docker-compose.override.yml
 
 windows:
 
-	@cp compose.0.windows.yml compose.ssh.o.yml
+	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
+	@cp compose.ssh.0.windows.yml docker-compose.override.yml
 
 sshUP:
 

@@ -37,13 +37,3 @@ networks:
   app:
     name: suap_app
     driver: bridge
-
-volumes:
-
-  sql:
-    name: suap_sql
-    driver: local
-    driver_opts:
-      type: none
-      device: /opt/suap/1/sql
-      o: bind
