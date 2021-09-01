@@ -8,14 +8,6 @@ volumes:
       device: /opt/suap/1/dba
       o: bind
 
-  lda:
-    name: suap_lda
-    driver: local
-    driver_opts:
-      type: none
-      device: /opt/suap/1/lda
-      o: bind
-
   red:
     name: suap_red
     driver: local

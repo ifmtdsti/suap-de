@@ -7,8 +7,8 @@ services:
     container_name: suap_ssh
     build:
       context: .
-      dockerfile: Dockerfile-ssh
-    image: suap_app
+      dockerfile: Dockerfile.ssh
+    image: suap_ssh
     restart: unless-stopped
     volumes:
       - ssh:/opt/suap/app
@@ -20,7 +20,6 @@ services:
       - ssh
     depends_on:
       - dba
-      - lda
       - red
       - sql
 
@@ -37,18 +36,6 @@ services:
       - ssh
     env_file:
       - .env-dba
-
-  lda:
-    hostname: lda
-    container_name: suap_lda
-    image: bitnami/openldap:2
-    restart: unless-stopped
-    volumes:
-      - lda:/bitnami/openldap
-    networks:
-      - ssh
-    env_file:
-      - .env-lda
 
   red:
     hostname: red

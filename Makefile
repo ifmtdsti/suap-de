@@ -17,6 +17,8 @@ init3:
 
 init4:
 
+	@mkdir -p opt/.ssh
+
 	@cp ./lib/bashrc  opt/.bashrc
 	@cp ./lib/profile opt/.profile
 
@@ -46,7 +48,6 @@ composeCL:
 	@docker volume rm suap_ssh
 	@docker volume rm suap_opt
 	@docker volume rm suap_dba
-	@docker volume rm suap_lda
 	@docker volume rm suap_red
 	@docker volume rm suap_sql
 
