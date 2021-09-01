@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+
+  app:
+    hostname: app
+    container_name: suap_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: suap_app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+      - "8022:22"
+    networks:
+      - app
+    depends_on:
+      - sql
+
+  sql:
+    hostname: sql
+    container_name: suap_sql
+    image: bitnami/postgresql:12
+    restart: unless-stopped
+    volumes:
+      - sql:/bitnami/postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - app
+    env_file:
+      - .env-sql
+
+networks:
+
+  app:
+    name: suap_app
+    driver: bridge

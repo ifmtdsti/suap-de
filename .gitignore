@@ -12,3 +12,6 @@ opt/
 
 #
 docker-compose.override.yml
+
+#
+requirements.txt

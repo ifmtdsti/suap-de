@@ -2,19 +2,22 @@ version: "3.4"
 
 services:
 
-  app:
-    hostname: app
-    container_name: suap_app
-    build: .
+  ssh:
+    hostname: ssh
+    container_name: suap_ssh
+    build:
+      context: .
+      dockerfile: Dockerfile-ssh
+    image: suap_app
     restart: unless-stopped
     volumes:
-      - app:/opt/suap/app
+      - ssh:/opt/suap/app
       - opt:/opt/suap
     ports:
       - "8000:8000"
       - "8022:22"
     networks:
-      - app
+      - ssh
     depends_on:
       - dba
       - lda
@@ -31,7 +34,7 @@ services:
     ports:
       - "8080:80"
     networks:
-      - app
+      - ssh
     env_file:
       - .env-dba
 
@@ -43,7 +46,7 @@ services:
     volumes:
       - lda:/bitnami/openldap
     networks:
-      - app
+      - ssh
     env_file:
       - .env-lda
 
@@ -55,7 +58,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     networks:
-      - app
+      - ssh
     env_file:
       - .env-red
 
@@ -69,18 +72,20 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - app
+      - ssh
     env_file:
       - .env-sql
 
 networks:
 
-  app:
+  ssh:
+    name: suap_ssh
     driver: bridge
 
 volumes:
 
-  app:
+  ssh:
+    name: suap_ssh
     driver: local
     driver_opts:
       type: none
@@ -88,6 +93,7 @@ volumes:
       o: bind
 
   opt:
+    name: suap_opt
     driver: local
     driver_opts:
       type: none

@@ -1,4 +1,4 @@
-PROJECT := suap
+USER := suap
 
 all:
 
@@ -13,10 +13,14 @@ init2:
 
 init3:
 
+	@cp ../suap/requirements/base.txt requirements.txt
+
+init4:
+
 	@cp ./lib/bashrc  opt/.bashrc
 	@cp ./lib/profile opt/.profile
 
-init: init1 init2 init3
+init: init1 init2 init3 init4
 
 set1:
 
@@ -26,33 +30,36 @@ set2:
 
 	@cp docker-compose.2.yml docker-compose.override.yml
 
-dcUP:
+build:
+	@docker build . --tag suap_app --force-rm --no-cache
 
-	@docker-compose -p $(PROJECT) up -d --build --remove-orphans
+composeUP:
 
-dcDW:
+	@docker-compose up --detach --build --remove-orphans
 
-	@docker-compose -p $(PROJECT) down --remove-orphans
+composeDW:
 
-dcCL:
+	@docker-compose down --remove-orphans
 
-	@docker volume rm $(PROJECT)_app
-	@docker volume rm $(PROJECT)_opt
-	@docker volume rm $(PROJECT)_dba
-	@docker volume rm $(PROJECT)_lda
-	@docker volume rm $(PROJECT)_red
-	@docker volume rm $(PROJECT)_sql
+composeCL:
 
-start: dcUP
+	@docker volume rm suap_ssh
+	@docker volume rm suap_opt
+	@docker volume rm suap_dba
+	@docker volume rm suap_lda
+	@docker volume rm suap_red
+	@docker volume rm suap_sql
 
-stop: dcDW dcCL
+start: composeUP
+
+stop: composeDW composeCL
 
 restart: stop start
 
 ssh:
 
-	@sshpass -psuap ssh -p 8022 suap@localhost
+	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
 
 run:
 
-	sshpass -psuap ssh -p 8022 -o ServerAliveInterval=60 suap@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
+	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
