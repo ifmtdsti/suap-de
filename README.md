@@ -33,8 +33,8 @@ Antes de usar o ambiente é necessario que se crie dois arquivos de configuraç�
 ### .env-dba
 
 ```
-DATABASE_HOST=sql
-ALLOW_EMPTY_PASSWORD=yes
+PGADMIN_DEFAULT_EMAIL=admin@ifmt.edu.br
+PGADMIN_DEFAULT_PASSWORD=admin
 ```
 
 ### .env-lda
