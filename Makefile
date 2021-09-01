@@ -8,16 +8,16 @@ init1:
 
 init2:
 
-	@cp ~/.ssh/id_rsa.ifmt     opt/.ssh/id_rsa
-	@cp ~/.ssh/id_rsa.ifmt.pub opt/.ssh/id_rsa.pub
+	@mkdir -p opt/.ssh
+
+	@cp ~/.ssh/id_rsa     opt/.ssh/id_rsa
+	@cp ~/.ssh/id_rsa.pub opt/.ssh/id_rsa.pub
 
 init3:
 
 	@cp ../suap/requirements/base.txt requirements.txt
 
 init4:
-
-	@mkdir -p opt/.ssh
 
 	@cp ./lib/bashrc  opt/.bashrc
 	@cp ./lib/profile opt/.profile
