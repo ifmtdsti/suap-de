@@ -11,6 +11,9 @@ opt/
 .env-sql
 
 #
+compose.ssh.o.yml
+
+#
 docker-compose.override.yml
 
 #
