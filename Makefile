@@ -24,40 +24,33 @@ init4:
 
 init: init1 init2 init3 init4
 
+build:
+
+	@docker build . --tag suap_app --force-rm --no-cache
+
 linux1:
 
-	@cp docker-compose.linux.1.yml docker-compose.override.yml
+	@cp compose.1.linux.yml compose.ssh.o.yml
 
 linux2:
 
-	@cp docker-compose.linux.2.yml docker-compose.override.yml
+	@cp compose.2.linux.yml compose.ssh.o.yml
 
 windows:
 
-	@cp docker-compose.windows.yml docker-compose.override.yml
+	@cp compose.0.windows.yml compose.ssh.o.yml
 
-build-suap-app:
-	@docker build . --tag suap_app --force-rm --no-cache
+sshUP:
 
-composeUP:
+	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
 
-	@docker-compose up --detach --build --remove-orphans
+sshDW:
 
-composeDW:
+	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
 
-	@docker-compose down --remove-orphans
+start: sshUP
 
-composeCL:
-
-	@docker volume rm suap_ssh
-	@docker volume rm suap_opt
-	@docker volume rm suap_dba
-	@docker volume rm suap_red
-	@docker volume rm suap_sql
-
-start: composeUP
-
-stop: composeDW composeCL
+stop: sshDW
 
 restart: stop start
 
@@ -66,5 +59,13 @@ ssh:
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
 
 run:
+
+	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
+
+sshx:
+
+	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
+
+runx:
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"

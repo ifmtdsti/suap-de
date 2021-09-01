@@ -2,52 +2,21 @@ version: "3.4"
 
 services:
 
-  ssh:
-    hostname: ssh
-    container_name: suap_ssh
+  app:
+    hostname: app
+    container_name: suap_app
     build:
       context: .
-      dockerfile: Dockerfile.ssh
-    image: suap_ssh
+      dockerfile: Dockerfile
+    image: suap_app
     restart: unless-stopped
-    volumes:
-      - ssh:/opt/suap/app
-      - opt:/opt/suap
     ports:
       - "8000:8000"
       - "8022:22"
     networks:
-      - ssh
+      - app
     depends_on:
-      - dba
-      - red
       - sql
-
-  dba:
-    hostname: dba
-    container_name: suap_dba
-    image: dpage/pgadmin4
-    restart: unless-stopped
-    volumes:
-      - dba:/var/lib/pgadmin
-    ports:
-      - "8080:80"
-    networks:
-      - ssh
-    env_file:
-      - .env-dba
-
-  red:
-    hostname: red
-    container_name: suap_red
-    image: bitnami/redis:4.0.9
-    restart: unless-stopped
-    volumes:
-      - red:/bitnami/redis/data
-    networks:
-      - ssh
-    env_file:
-      - .env-red
 
   sql:
     hostname: sql
@@ -59,30 +28,22 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - ssh
+      - app
     env_file:
       - .env-sql
 
 networks:
 
-  ssh:
-    name: suap_ssh
+  app:
+    name: suap_app
     driver: bridge
 
 volumes:
 
-  ssh:
-    name: suap_ssh
+  sql:
+    name: suap_sql
     driver: local
     driver_opts:
       type: none
-      device: ../suap
-      o: bind
-
-  opt:
-    name: suap_opt
-    driver: local
-    driver_opts:
-      type: none
-      device: ./opt
+      device: /opt/suap/1/sql
       o: bind

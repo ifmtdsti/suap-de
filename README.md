@@ -26,6 +26,7 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 Antes de usar o ambiente é necessario que se crie dois arquivos de configuração:
 
 * .env-dba - configuração do phppgadmin
+* .env-lda - configuração do openldap
 * .env-red - configuração do redis
 * .env-sql - configuração do postgres
 
@@ -34,6 +35,15 @@ Antes de usar o ambiente é necessario que se crie dois arquivos de configuraç�
 ```
 PGADMIN_DEFAULT_EMAIL=admin@ifmt.edu.br
 PGADMIN_DEFAULT_PASSWORD=admin
+```
+
+### .env-lda
+
+```
+LDAP_ADMIN_USERNAME=admin
+LDAP_ADMIN_PASSWORD=admin
+LDAP_USERS=user1
+LDAP_PASSWORDS=user1
 ```
 
 ### .env-red
