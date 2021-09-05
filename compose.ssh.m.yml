@@ -4,11 +4,11 @@ services:
 
   ssh:
     hostname: ssh
-    container_name: suap_ssh
+    container_name: suap-ssh
     build:
       context: .
       dockerfile: Dockerfile.ssh
-    image: suap_ssh
+    image: ifmt/suap-ssh
     restart: unless-stopped
     volumes:
       - ssh:/opt/suap/app
@@ -25,8 +25,8 @@ services:
 
   dba:
     hostname: dba
-    container_name: suap_dba
-    image: dpage/pgadmin4
+    container_name: suap-dba
+    image: dpage/pgadmin4:5.6
     restart: unless-stopped
     volumes:
       - dba:/var/lib/pgadmin
@@ -39,7 +39,7 @@ services:
 
   red:
     hostname: red
-    container_name: suap_red
+    container_name: suap-red
     image: bitnami/redis:4.0.9
     restart: unless-stopped
     volumes:
@@ -51,7 +51,7 @@ services:
 
   sql:
     hostname: sql
-    container_name: suap_sql
+    container_name: suap-sql
     image: bitnami/postgresql:12
     restart: unless-stopped
     volumes:
@@ -66,13 +66,13 @@ services:
 networks:
 
   ssh:
-    name: suap_ssh
+    name: suap-ssh
     driver: bridge
 
 volumes:
 
   ssh:
-    name: suap_ssh
+    name: suap-ssh
     driver: local
     driver_opts:
       type: none
@@ -80,7 +80,7 @@ volumes:
       o: bind
 
   opt:
-    name: suap_opt
+    name: suap-opt
     driver: local
     driver_opts:
       type: none

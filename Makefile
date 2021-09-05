@@ -26,7 +26,7 @@ init: init1 init2 init3 init4
 
 build:
 
-	@docker build . --tag suap_app --force-rm --no-cache
+	@docker build . --tag ifmt/suap-app --force-rm --no-cache
 
 linux1:
 

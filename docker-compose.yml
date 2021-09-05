@@ -4,11 +4,11 @@ services:
 
   app:
     hostname: app
-    container_name: suap_app
+    container_name: suap-app
     build:
       context: .
       dockerfile: Dockerfile
-    image: suap_app
+    image: ifmt/suap-app
     restart: unless-stopped
     ports:
       - "8000:8000"
@@ -20,7 +20,7 @@ services:
 
   sql:
     hostname: sql
-    container_name: suap_sql
+    container_name: suap-sql
     image: bitnami/postgresql:12
     restart: unless-stopped
     volumes:
@@ -35,5 +35,5 @@ services:
 networks:
 
   app:
-    name: suap_app
+    name: suap-app
     driver: bridge

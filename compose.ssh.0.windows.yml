@@ -17,7 +17,7 @@ volumes:
       o: bind
 
   sql:
-    name: suap_sql
+    name: suap-sql
     driver: local
     driver_opts:
       type: none
