@@ -15,12 +15,12 @@ init2:
 
 init3:
 
-	@cp ../suap/requirements/base.txt requirements.txt
+	@cp ./lib/bashrc.txt  opt/.bashrc
+	@cp ./lib/profile.txt opt/.profile
 
 init4:
 
-	@cp ./lib/bashrc  opt/.bashrc
-	@cp ./lib/profile opt/.profile
+	@cp ../suap/requirements/base.txt requirements.txt
 
 init: init1 init2 init3 init4
 

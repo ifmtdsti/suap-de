@@ -1,4 +1,4 @@
-FROM carlosrabelo/suap-os:latest
+FROM ifmt/suap-os:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
