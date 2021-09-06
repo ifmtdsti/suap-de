@@ -59,16 +59,20 @@ restart: stop start
 
 ssh:
 
-	ssh -p 8022 ${USER}@localhost
+	@ssh -p 8022 ${USER}@localhost
 
 run:
 
-	ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
+	@ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
 
-xssh:
+clearKH:
+
+	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null
+
+sshx: clearKH
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
 
-xrun:
+runx: clearKH
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"

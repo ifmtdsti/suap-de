@@ -17,7 +17,7 @@ services:
       - "8000:8000"
       - "8022:22"
     networks:
-      - ssh
+      - net
     depends_on:
       - dba
       - red
@@ -33,7 +33,7 @@ services:
     ports:
       - "8080:80"
     networks:
-      - ssh
+      - net
     env_file:
       - .env-dba
 
@@ -45,7 +45,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     networks:
-      - ssh
+      - net
     env_file:
       - .env-red
 
@@ -59,14 +59,14 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - ssh
+      - net
     env_file:
       - .env-sql
 
 networks:
 
-  ssh:
-    name: suap-ssh
+  net:
+    name: suap-net
     driver: bridge
 
 volumes:

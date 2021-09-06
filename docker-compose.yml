@@ -14,7 +14,7 @@ services:
       - "8000:8000"
       - "8022:22"
     networks:
-      - app
+      - net
     depends_on:
       - sql
 
@@ -28,12 +28,12 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - app
+      - net
     env_file:
       - .env-sql
 
 networks:
 
-  app:
-    name: suap-app
+  net:
+    name: suap-net
     driver: bridge
