@@ -14,23 +14,22 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Targets disponiveis para o make
 
-| Target | Ação                                                  |
-|--------|-------------------------------------------------------|
+| Target | Ação                                                   |
+|--------|--------------------------------------------------------|
 | init   | executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash |
-| start  | inicializa o containers suap-sql, suap-dba e suap-ssh |
-| stop   | paraliza os containers suap-sql, suap-dba e suap-ssh  |
-| ssh    | acessa via ssh ao container "suap-ssh"                |
-| run    | executa o comando "./manage.py runserver 0.0.0.0:8000 |
-| build  | cria o container "suap-app", usado pelo pyCharm       |
-| sshs   | O mesmo que ssh, só que usando sshpass                |
-| runx   | o Mesmo que run, só que usando sshpass                |
+| start  | inicializa o containers suap-sql, suap-dba e suap-ssh  |
+| stop   | paraliza os containers suap-sql, suap-dba e suap-ssh   |
+| ssh    | acessa via ssh ao container "suap-ssh"                 |
+| run    | executa o comando "./manage.py runserver 0.0.0.0:8000" |
+| build  | cria o container "suap-app", usado pelo pyCharm        |
+| sshs   | O mesmo que ssh, só que usando sshpass                 |
+| runx   | o Mesmo que run, só que usando sshpass                 |
 
 ## Configurações
 
-Antes de usar o ambiente é necessario que se crie dois arquivos de configuração:
+Antes de usar o ambiente é necessario que se crie/altere os arquivos de configuração dos containers:
 
 * .env-dba - configuração do phppgadmin
-* .env-lda - configuração do openldap
 * .env-red - configuração do redis
 * .env-sql - configuração do postgres
 
@@ -39,15 +38,6 @@ Antes de usar o ambiente é necessario que se crie dois arquivos de configuraç�
 ```
 PGADMIN_DEFAULT_EMAIL=admin@ifmt.edu.br
 PGADMIN_DEFAULT_PASSWORD=admin
-```
-
-### .env-lda
-
-```
-LDAP_ADMIN_USERNAME=admin
-LDAP_ADMIN_PASSWORD=admin
-LDAP_USERS=user1
-LDAP_PASSWORDS=user1
 ```
 
 ### .env-red
