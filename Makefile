@@ -77,10 +77,10 @@ clearKH:
 
 	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null
 
-sshx: clearKH
+xssh: clearKH
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
 
-runx: clearKH
+xrun: clearKH
 
 	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
