@@ -66,7 +66,7 @@ ssh:
 
 run:
 
-	@ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
+	@ssh -p 8022 ${USER}@localhost "bash -l -c 'gunicorn --bind=0.0.0.0:8000 --config=bin/gunicorn_docker.conf --daemon  suap.wsgi:application'"
 
 clearKH:
 
@@ -78,4 +78,4 @@ xssh: clearKH
 
 xrun: clearKH
 
-	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c './manage.py runserver 0.0.0.0:8000 >/dev/null &'"
+	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c 'gunicorn --bind=0.0.0.0:8000 --config=bin/gunicorn_docker.conf --daemon  suap.wsgi:application'"
