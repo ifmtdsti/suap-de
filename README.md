@@ -14,16 +14,16 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Targets disponiveis para o make
 
-| Target | Ação                                                   |
-|--------|--------------------------------------------------------|
-| init   | executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash |
-| start  | inicializa o containers suap-sql, suap-dba e suap-ssh  |
-| stop   | paraliza os containers suap-sql, suap-dba e suap-ssh   |
-| ssh    | acessa via ssh ao container "suap-ssh"                 |
-| run    | executa o comando "./manage.py runserver 0.0.0.0:8000" |
-| build  | cria o container "suap-app", usado pelo pyCharm        |
-| sshs   | O mesmo que ssh, só que usando sshpass                 |
-| runx   | o Mesmo que run, só que usando sshpass                 |
+| Target              | Ação                                                   |
+|---------------------|--------------------------------------------------------|
+| init                | executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash |
+| start               | inicializa o containers suap-sql, suap-dba e suap-ssh  |
+| stop                | paraliza os containers suap-sql, suap-dba e suap-ssh   |
+| ssh                 | acessa via ssh ao container "suap-ssh"                 |
+| build               | cria o container "suap-app", usado pelo pyCharm        |
+| gunicorn            | executa a aplicação suap                               |
+| manage-sync         | execute "manage.py sync"                               |
+| manage-password-123 | executa "manage.py set_passwords_to_123"               |
 
 ## Configurações
 

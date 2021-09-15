@@ -1,5 +1,15 @@
 USER := suap
 
+ifeq ($(OS), Windows_NT)
+
+    SSH=ssh -p 8022 ${USER}@localhost
+
+else
+
+    SSH=sshpass -p${USER} ssh -p 8022 ${USER}@localhost
+
+endif
+
 all:
 
 init1:
@@ -9,6 +19,8 @@ init1:
 init2:
 
 	@mkdir -p lib
+
+	echo ${EXECUTABLE}
 
 init3:
 
@@ -60,22 +72,22 @@ stop: sshDW
 
 restart: stop start
 
-ssh:
-
-	@ssh -p 8022 ${USER}@localhost
-
-run:
-
-	@ssh -p 8022 ${USER}@localhost "bash -l -c 'gunicorn --bind=0.0.0.0:8000 --config=bin/gunicorn_docker.conf --daemon  suap.wsgi:application'"
-
 clearKH:
 
 	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null
 
-xssh: clearKH
+ssh:
 
-	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost
+	@${SSH}
 
-xrun: clearKH
+gunicorn:
 
-	@sshpass -p${USER} ssh -p 8022 ${USER}@localhost "bash -l -c 'gunicorn --bind=0.0.0.0:8000 --config=bin/gunicorn_docker.conf --daemon  suap.wsgi:application'"
+	@${SSH} "bash -l -c 'gunicorn --bind=0.0.0.0:8000 --config=bin/gunicorn_docker.conf --daemon  suap.wsgi:application'"
+
+manage-sync:
+
+	@${SSH} "bash -l -c './manage.py sync'"
+
+manage-password-123:
+
+	@${SSH} "bash -l -c './manage.py set_passwords_to_123'"
