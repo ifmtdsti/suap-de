@@ -21,11 +21,11 @@ init4:
 	@cp ./env/env-red.txt .env-red
 	@cp ./env/env-sql.txt .env-sql
 
-init6:
+init5:
 
 	@cp ../suap/requirements/base.txt lib/requirements.txt
 
-init: init1 init2 init3 init4
+init: init1 init2 init3 init4 init5
 
 build:
 
