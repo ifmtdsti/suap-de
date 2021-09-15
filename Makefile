@@ -58,17 +58,17 @@ windows:
 	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
 	@cp compose.ssh.0.windows.yml docker-compose.override.yml
 
-sshUP:
+startUP: compose.ssh.o.yml
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
 
-sshDW:
+startDW: compose.ssh.o.yml
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
 
-start: sshUP
+start: startUP
 
-stop: sshDW
+stop: startDW
 
 restart: stop start
 
@@ -86,8 +86,8 @@ gunicorn:
 
 manage-sync:
 
-	@${SSH} "bash -l -c './manage.py sync'"
+	@${SSH} "bash -l -c 'python manage.py sync'"
 
 manage-password-123:
 
-	@${SSH} "bash -l -c './manage.py set_passwords_to_123'"
+	@${SSH} "bash -l -c 'python manage.py set_passwords_to_123'"
