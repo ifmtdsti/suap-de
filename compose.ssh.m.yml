@@ -12,7 +12,6 @@ services:
     restart: unless-stopped
     volumes:
       - ssh:/opt/suap/app
-      - opt:/opt/suap
     ports:
       - "8000:8000"
       - "8022:22"

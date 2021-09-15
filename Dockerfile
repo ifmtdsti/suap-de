@@ -8,8 +8,8 @@ ENV LC_ALL=pt_BR.UTF-8
 
 RUN locale-gen pt_BR.UTF-8
 
-COPY requirements.txt /requirements.txt
+COPY lib/requirements.txt /requirements.txt
 
-RUN pip install -r /requirements.txt
+RUN pip install -r /requirements.txt && rm /requirements.txt
 
 EXPOSE 8000

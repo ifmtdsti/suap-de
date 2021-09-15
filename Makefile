@@ -8,29 +8,24 @@ init1:
 
 init2:
 
-	@mkdir -p opt/.ssh
+	@mkdir -p lib
 
 init3:
 
-	@cp ~/.ssh/id_rsa     opt/.ssh/id_rsa
-	@cp ~/.ssh/id_rsa.pub opt/.ssh/id_rsa.pub
+	@cp ~/.ssh/id_rsa     lib/id_rsa
+	@cp ~/.ssh/id_rsa.pub lib/id_rsa.pub
 
 init4:
 
-	@cp ./lib/bashrc.txt  opt/.bashrc
-	@cp ./lib/profile.txt opt/.profile
-
-init5:
-
-	@cp ./lib/env-dba.txt .env-dba
-	@cp ./lib/env-red.txt .env-red
-	@cp ./lib/env-sql.txt .env-sql
+	@cp ./env/env-dba.txt .env-dba
+	@cp ./env/env-red.txt .env-red
+	@cp ./env/env-sql.txt .env-sql
 
 init6:
 
-	@cp ../suap/requirements/base.txt requirements.txt
+	@cp ../suap/requirements/base.txt lib/requirements.txt
 
-init: init1 init2 init3 init4 init5 initi6
+init: init1 init2 init3 init4
 
 build:
 

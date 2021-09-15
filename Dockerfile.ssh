@@ -10,6 +10,21 @@ RUN locale-gen pt_BR.UTF-8 && groupadd -g 1000 suap && useradd -rm -d /opt/suap 
 
 RUN apt-get --yes update && apt-get --yes install openssh-server && service ssh start
 
+USER suap
+
+WORKDIR /opt/suap
+
+ADD lib/profile.txt .profile
+ADD lib/bashrc.txt .bashrc
+ADD lib/id_rsa .ssh/id_ira
+ADD lib/id_rsa.pub .ssh/id_rsa.pub
+
+ADD lib/requirements.txt .
+
+RUN python -m virtualenv /opt/suap/env && . /opt/suap/env/bin/activate && pip install -r requirements.txt && rm requirements.txt
+
+USER root
+
 EXPOSE 22
 
 ENTRYPOINT [ "/usr/sbin/sshd", "-D" ]

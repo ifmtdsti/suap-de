@@ -1,8 +1,7 @@
 .git/
 .gitignore
 
-lib/
-opt/
+env/
 
 Dockerfile
 Makefile

@@ -1,5 +1,6 @@
 #
-opt/
+lib/id_rsa
+lib/id_rsa.pub
 
 #
 .bash_history
