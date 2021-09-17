@@ -14,10 +14,10 @@ USER suap
 
 WORKDIR /opt/suap
 
-ADD lib/profile.txt .profile
-ADD lib/bashrc.txt .bashrc
-ADD lib/id_rsa .ssh/id_ira
-ADD lib/id_rsa.pub .ssh/id_rsa.pub
+ADD --chown=suap:suap lib/profile.txt .profile
+ADD --chown=suap:suap lib/bashrc.txt  .bashrc
+ADD --chown=suap:suap lib/id_rsa      .ssh/id_rsa
+ADD --chown=suap:suap lib/id_rsa.pub  .ssh/id_rsa.pub
 
 ADD lib/requirements.txt .
 
