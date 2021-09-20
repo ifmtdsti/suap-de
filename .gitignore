@@ -1,6 +1,7 @@
 #
 lib/id_rsa
 lib/id_rsa.pub
+lib/*.txt
 
 #
 .bash_history
@@ -16,6 +17,3 @@ compose.ssh.o.yml
 
 #
 docker-compose.override.yml
-
-#
-requirements.txt

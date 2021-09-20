@@ -61,7 +61,7 @@ init4:
 
 init5:
 
-	@cp ../suap/requirements/base.txt lib/requirements.txt
+	@cp ../suap/requirements/*.txt lib/
 
 linux1:
 
