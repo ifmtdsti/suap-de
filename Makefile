@@ -32,6 +32,10 @@ gunicorn:
 
 	@${SSH} "bash -l -c 'gunicorn --bind 0.0.0.0:8000 --config bin/gunicorn_docker.conf --pid ../app.pid --daemon suap.wsgi:application'"
 
+clear-sessions:
+
+	@${SSH} "bash -l -c 'rm -fr deploy/sessions/session*'"
+
 manage-sync:
 
 	@${SSH} "bash -l -c 'python manage.py sync'"
