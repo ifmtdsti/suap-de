@@ -30,7 +30,7 @@ shell:
 
 gunicorn:
 
-	@${SSH} "bash -l -c 'gunicorn --bind 0.0.0.0:8000 --config bin/gunicorn_docker.conf --pid bin/app.pid --daemon suap.wsgi:application'"
+	@${SSH} "bash -l -c 'gunicorn --bind 0.0.0.0:8000 --config bin/gunicorn_docker.conf --pid ../app.pid --daemon suap.wsgi:application'"
 
 manage-sync:
 
