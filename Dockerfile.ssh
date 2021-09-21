@@ -2,9 +2,9 @@ FROM ifmt/suap-os:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV LANG pt_BR.UTF-8
-ENV LANGUAGE pt_BR:en
-ENV LC_ALL pt_BR.UTF-8
+ENV LANG=pt_BR.UTF-8
+ENV LANGUAGE=pt_BR:en
+ENV LC_ALL=pt_BR.UTF-8
 
 RUN locale-gen pt_BR.UTF-8 && groupadd -g 1000 suap && useradd -rm -d /opt/suap -s /bin/bash -g suap -G sudo -u 1000 suap && echo 'suap:suap' | chpasswd
 
@@ -22,7 +22,7 @@ ADD --chown=suap:suap lib/id_rsa.pub  .ssh/id_rsa.pub
 ADD lib/base.txt .
 ADD lib/development.txt .
 
-RUN python -m virtualenv /opt/suap/env && . /opt/suap/env/bin/activate && pip install -r development.txt && rm base.txt && rm development.txt
+RUN python -m virtualenv -p python3 /opt/suap/env && . /opt/suap/env/bin/activate && pip install -r development.txt && rm base.txt && rm development.txt
 
 USER root
 
