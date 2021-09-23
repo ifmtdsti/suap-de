@@ -79,11 +79,3 @@ volumes:
       type: none
       device: ../suap
       o: bind
-
-  opt:
-    name: suap-opt
-    driver: local
-    driver_opts:
-      type: none
-      device: ./opt
-      o: bind
