@@ -26,6 +26,6 @@ RUN python -m virtualenv -p python3 /opt/suap/env && . /opt/suap/env/bin/activat
 
 USER root
 
-EXPOSE 22
+EXPOSE 8022
 
-ENTRYPOINT [ "/usr/sbin/sshd", "-D" ]
+ENTRYPOINT [ "/usr/sbin/sshd", "-p 8022", "-D" ]

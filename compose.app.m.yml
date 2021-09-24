@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
-      - "8022:22"
+      - "8022:8022"
     networks:
       - net
     depends_on:
@@ -29,6 +29,7 @@ services:
       - dba:/var/lib/pgadmin
     ports:
       - "8080:80"
+      - "8081:443"
     networks:
       - net
     env_file:
