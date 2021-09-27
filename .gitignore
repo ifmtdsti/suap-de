@@ -1,7 +1,8 @@
 #
-lib/id_rsa
-lib/id_rsa.pub
 lib/*.txt
+lib/pip/*.txt
+lib/ssh/id_rsa
+lib/ssh/id_rsa.pub
 
 #
 .bash_history

@@ -14,13 +14,16 @@ USER suap
 
 WORKDIR /opt/suap
 
+ADD --chown=suap:suap lib/bashrc.txt .bashrc
 ADD --chown=suap:suap lib/profile.txt .profile
-ADD --chown=suap:suap lib/bashrc.txt  .bashrc
-ADD --chown=suap:suap lib/id_rsa      .ssh/id_rsa
-ADD --chown=suap:suap lib/id_rsa.pub  .ssh/id_rsa.pub
 
-ADD lib/base.txt .
-ADD lib/development.txt .
+ADD --chown=suap:suap lib/gitconfig.txt app/.gitconfig
+
+ADD --chown=suap:suap lib/ssh/id_rsa .ssh/id_rsa
+ADD --chown=suap:suap lib/ssh/id_rsa.pub .ssh/id_rsa.pub
+
+ADD --chown=suap:suap lib/pip/base.txt .
+ADD --chown=suap:suap lib/pip/development.txt .
 
 RUN python -m virtualenv -p python3 /opt/suap/env && . /opt/suap/env/bin/activate && pip install -r development.txt && rm base.txt && rm development.txt
 
@@ -28,4 +31,4 @@ USER root
 
 EXPOSE 8022
 
-ENTRYPOINT [ "/usr/sbin/sshd", "-p 8022", "-D" ]
+ENTRYPOINT [ "/usr/sbin/sshd", "-D" ]

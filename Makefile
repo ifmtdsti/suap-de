@@ -2,11 +2,11 @@ USER := suap
 
 ifeq ($(OS), Windows_NT)
 
-    SSH=ssh -p 8022 ${USER}@localhost
+    SSH=ssh -p 8001 ${USER}@localhost
 
 else
 
-    SSH=sshpass -p${USER} ssh -p 8022 ${USER}@localhost
+    SSH=sshpass -p${USER} ssh -p 8001 ${USER}@localhost
 
 endif
 
@@ -14,13 +14,17 @@ all:
 
 init: init1 init2 init3 init4 init5
 
+start: composeUP
+
+stop: composeDW
+
 build:
 
-	@docker build --file compose.app.m.yml --file compose.app.o.yml --tag ifmt/suap-app --force-rm --no-cache
+	@docker build . --tag ifmt/suap-app --force-rm --no-cache
 
-start: startUP
+clear-images: stop
 
-stop: startDW
+	@docker rmi ifmt/suap-app ifmt/suap-ssh
 
 restart: stop start
 
@@ -50,22 +54,27 @@ init1:
 
 init2:
 
-	@mkdir -p lib
+	@mkdir -p env/
+	@mkdir -p lib/
 
 init3:
 
-	@cp ~/.ssh/id_rsa     lib/id_rsa
-	@cp ~/.ssh/id_rsa.pub lib/id_rsa.pub
+	@cp env/env-dba.txt .env-dba
+	@cp env/env-red.txt .env-red
+	@cp env/env-sql.txt .env-sql
 
 init4:
 
-	@cp ./env/env-dba.txt .env-dba
-	@cp ./env/env-red.txt .env-red
-	@cp ./env/env-sql.txt .env-sql
+	@mkdir -p lib/ssh/
+
+	@cp ~/.ssh/id_rsa     lib/ssh/id_rsa
+	@cp ~/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 
 init5:
 
-	@cp ../suap/requirements/*.txt lib/
+	@mkdir -p lib/pip/
+
+	@cp ../suap/requirements/*.txt lib/pip/
 
 linux1:
 
@@ -79,14 +88,14 @@ windows:
 
 	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
 
-startUP: compose.ssh.m.yml compose.ssh.o.yml
+composeUP: compose.ssh.m.yml compose.ssh.o.yml
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
 
-startDW: compose.ssh.m.yml compose.ssh.o.yml
+composeDW: compose.ssh.m.yml compose.ssh.o.yml
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
 
 clearKH:
 
-	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null
+	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8001" >/dev/null

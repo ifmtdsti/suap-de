@@ -8,8 +8,8 @@ ENV LC_ALL=pt_BR.UTF-8
 
 RUN locale-gen pt_BR.UTF-8
 
-ADD lib/base.txt /base.txt
-ADD lib/development.txt /development.txt
+ADD ./lib/pip/base.txt /base.txt
+ADD ./lib/pip/development.txt /development.txt
 
 RUN pip install -r /development.txt && rm /base.txt && rm /development.txt
 
