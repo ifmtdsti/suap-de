@@ -14,8 +14,6 @@ all:
 
 init: init0 init1 init2 init3 init4 init5
 
-init-lite: init1 init2 init3 init4 init5
-
 start: composeUP
 
 stop: composeDW
@@ -32,27 +30,27 @@ restart: stop start
 
 shell:
 
-	@${SSH}
+	@-${SSH}
 
 gunicorn:
 
-	@${SSH} "bash -l -c 'gunicorn --bind 0.0.0.0:8000 --pid ../app.pid --daemon suap.wsgi:application'"
+	@-${SSH} "bash -l -c 'gunicorn --bind 0.0.0.0:8000 --pid ../app.pid --daemon suap.wsgi:application'"
 
 clear-sessions:
 
-	@${SSH} "bash -l -c 'rm -fr deploy/sessions/session*'"
+	@-${SSH} "bash -l -c 'rm -fr deploy/sessions/session*'"
 
 manage-sync:
 
-	@${SSH} "bash -l -c 'python manage.py sync'"
+	@-${SSH} "bash -l -c 'python manage.py sync'"
 
 manage-password-123:
 
-	@${SSH} "bash -l -c 'python manage.py set_passwords_to_123'"
+	@-${SSH} "bash -l -c 'python manage.py set_passwords_to_123'"
 
 init0:
 
-	@git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap
+	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
 
 init1:
 
