@@ -12,7 +12,7 @@ endif
 
 all:
 
-init: init0 init1 init2 init3 init4 init5
+init: init1 init2 init3 init4 init5 init6 init7
 
 start: composeUP
 
@@ -48,33 +48,37 @@ manage-password-123:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to_123'"
 
-init0:
+init1:
 
 	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
 
-init1:
+init2:
+
+	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:carlosrabelo/update-suap-pc.git ../cron; fi
+
+init3:
 
 	@mkdir -p env/
 	@mkdir -p lib/
 
-init2:
+init4:
 
 	@cp env/env-dba.txt .env-dba
 	@cp env/env-red.txt .env-red
 	@cp env/env-sql.txt .env-sql
 
-init3:
+init5:
 
 	@cp ~/.gitconfig lib/gitconfig.txt
 
-init4:
+init6:
 
 	@mkdir -p lib/ssh/
 
 	@cp ~/.ssh/id_rsa     lib/ssh/id_rsa
 	@cp ~/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 
-init5:
+init7:
 
 	@mkdir -p lib/pip/
 
