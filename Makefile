@@ -12,6 +12,14 @@ endif
 
 all:
 
+start-docker:
+
+	@sudo service docker start
+
+stop-docker:
+
+	@sudo service docker stop
+
 init: init1 init2 init3 init4 init5 init6 init7
 
 start: composeUP
