@@ -67,7 +67,10 @@ init2:
 init3:
 
 	@mkdir -p env/
-	@mkdir -p lib/
+	@mkdir -p lib/env
+	@mkdir -p lib/git
+	@mkdir -p lib/pip
+	@mkdir -p lib/ssh
 
 init4:
 
@@ -77,14 +80,14 @@ init4:
 
 init5:
 
-	@cp ~/.gitconfig lib/git/gitconfig.txt
+	@cp ${HOME}/.gitconfig lib/git/gitconfig.txt
 
 init6:
 
 	@mkdir -p lib/ssh/
 
-	@cp ~/.ssh/id_rsa     lib/ssh/id_rsa
-	@cp ~/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
+	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
+	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 
 init7:
 
