@@ -40,13 +40,21 @@ shell:
 
 	@-${SSH}
 
+virtualenv:
+
+	@-${SSH} "bash -l -c 'virtualenv -p python3 env'"
+
+pip-install:
+
+	@-${SSH} "bash -l -c 'pip install -r requirements/development.txt'"
+
+pip-uninstall:
+
+	@-${SSH} "bash -l -c 'deactivate && rm -fr ../env/*'"
+
 gunicorn:
 
 	@-${SSH} "bash -l -c 'gunicorn --bind 0.0.0.0:8000 --pid ../app.pid --daemon suap.wsgi:application'"
-
-clear-sessions:
-
-	@-${SSH} "bash -l -c 'rm -fr deploy/sessions/session*'"
 
 manage-sync:
 
