@@ -1,11 +1,5 @@
 #
-lib/*.txt
-lib/pip/*.txt
-lib/ssh/id_rsa
-lib/ssh/id_rsa.pub
-
-#
-.bash_history
+env/
 
 #
 .env-dba
@@ -15,6 +9,3 @@ lib/ssh/id_rsa.pub
 
 #
 compose.ssh.o.yml
-
-#
-docker-compose.override.yml

@@ -20,7 +20,7 @@ export PGUSER=postgres
 export PGPASSWORD=postgres
 
 #
-if [ -d "$HOME/env" ] ; then
+if [ -f "$HOME/env/bin/activate" ] ; then
     source $HOME/env/bin/activate
     cd $HOME/app
     export HOME=$HOME/app

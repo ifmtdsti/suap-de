@@ -2,17 +2,14 @@ version: "3.4"
 
 services:
 
-  ssh:
-    hostname: ssh
-    container_name: suap-ssh
+  app:
+    hostname: app
+    container_name: suap-app
     build:
       context: .
-      dockerfile: Dockerfile.ssh
-    image: ifmt/suap-ssh
+      dockerfile: Dockerfile
+    image: ifmt/suap-app
     restart: unless-stopped
-    volumes:
-      - ssh_app:/opt/suap/app
-      - ssh_env:/opt/suap/env
     ports:
       - "8000:8000"
       - "8001:22"
@@ -71,21 +68,3 @@ networks:
   net:
     name: suap-net
     driver: bridge
-
-volumes:
-
-  ssh_app:
-    name: suap-app
-    driver: local
-    driver_opts:
-      type: none
-      device: ../suap
-      o: bind
-
-  ssh_env:
-    name: suap-env
-    driver: local
-    driver_opts:
-      type: none
-      device: ./env
-      o: bind
