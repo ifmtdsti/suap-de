@@ -20,11 +20,17 @@ stop-docker:
 
 	@sudo service docker stop
 
+start: compose-up clearKH
+
+stop: compose-dw
+
+restart: stop start
+
 init: init1 init2 init3 init4 init5 init6 init7
 
-start: composeUP
+clearKH:
 
-stop: composeDW
+	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
 
 build:
 
@@ -33,8 +39,6 @@ build:
 clear-images: stop
 
 	@docker rmi ifmt/suap-app ifmt/suap-ssh
-
-restart: stop start
 
 shell:
 
@@ -103,26 +107,22 @@ init7:
 
 	@cp ../suap/requirements/*.txt lib/pip/
 
-linux1:
-
-	@cp compose.ssh.1.linux.yml compose.ssh.o.yml
-
-linux2:
-
-	@cp compose.ssh.2.linux.yml compose.ssh.o.yml
-
-windows:
-
-	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
-
-composeUP: compose.ssh.m.yml compose.ssh.o.yml
+compose-up: compose.ssh.m.yml compose.ssh.o.yml
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
 
-composeDW: compose.ssh.m.yml compose.ssh.o.yml
+compose-dw: compose.ssh.m.yml compose.ssh.o.yml
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
 
-clearKH:
+set-linux1:
 
-	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null
+	@cp compose.ssh.1.linux.yml compose.ssh.o.yml
+
+set-linux2:
+
+	@cp compose.ssh.2.linux.yml compose.ssh.o.yml
+
+set-windows:
+
+	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
