@@ -2,11 +2,11 @@ USER := suap
 
 ifeq ($(OS), Windows_NT)
 
-    SSH=ssh -p 8001 ${USER}@localhost
+    SSH=ssh -p 8022 ${USER}@localhost
 
 else
 
-    SSH=sshpass -p${USER} ssh -p 8001 ${USER}@localhost
+    SSH=sshpass -p${USER} ssh -p 8022 ${USER}@localhost
 
 endif
 
@@ -40,7 +40,7 @@ shell:
 
 	@-${SSH}
 
-virtualenv:
+virtual-env:
 
 	@-${SSH} "bash -l -c 'virtualenv -p python3 env'"
 
@@ -125,4 +125,4 @@ composeDW: compose.ssh.m.yml compose.ssh.o.yml
 
 clearKH:
 
-	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8001" >/dev/null
+	@ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null

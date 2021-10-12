@@ -11,11 +11,10 @@ services:
     image: ifmt/suap-ssh
     restart: unless-stopped
     volumes:
-      - ssh_app:/opt/suap/app
-      - ssh_env:/opt/suap/env
+      - ssh:/opt/suap/app
     ports:
-      - "8000:8000"
-      - "8001:22"
+      - "8022:22"
+      - "8080:8000"
     networks:
       - net
     depends_on:
@@ -31,8 +30,8 @@ services:
     volumes:
       - dba:/var/lib/pgadmin
     ports:
-      - "8080:80"
-      - "8081:443"
+      - "8480:80"
+      - "8443:443"
     networks:
       - net
     env_file:
@@ -74,18 +73,10 @@ networks:
 
 volumes:
 
-  ssh_app:
-    name: suap-app
+  ssh:
+    name: suap-ssh
     driver: local
     driver_opts:
       type: none
       device: ../suap
-      o: bind
-
-  ssh_env:
-    name: suap-env
-    driver: local
-    driver_opts:
-      type: none
-      device: ./env
       o: bind
