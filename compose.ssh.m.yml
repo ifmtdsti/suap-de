@@ -11,7 +11,8 @@ services:
     image: ifmt/suap-ssh
     restart: unless-stopped
     volumes:
-      - ssh:/opt/suap/app
+      - ssh_app:/opt/suap/app
+      - ssh_env:/opt/suap/env
     ports:
       - "8022:22"
       - "8080:8000"
@@ -73,10 +74,18 @@ networks:
 
 volumes:
 
-  ssh:
-    name: suap-ssh
+  ssh_app:
+    name: suap-ssh-app
     driver: local
     driver_opts:
       type: none
       device: ../suap
+      o: bind
+
+  ssh_env:
+    name: suap-ssh-env
+    driver: local
+    driver_opts:
+      type: none
+      device: ./env
       o: bind
