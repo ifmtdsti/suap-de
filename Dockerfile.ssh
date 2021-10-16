@@ -21,6 +21,7 @@ ADD --chown=suap:suap lib/git/gitconfig.txt app/.gitconfig
 
 ADD --chown=suap:suap lib/ssh/id_rsa .ssh/id_rsa
 ADD --chown=suap:suap lib/ssh/id_rsa.pub .ssh/id_rsa.pub
+ADD --chown=suap:suap lib/ssh/authorized_keys .ssh/authorized_keys
 
 USER root
 

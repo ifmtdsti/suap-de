@@ -100,6 +100,7 @@ init6:
 
 	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
+	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
 init7:
 
