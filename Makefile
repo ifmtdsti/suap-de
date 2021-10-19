@@ -26,7 +26,7 @@ stop: compose-dw
 
 restart: stop start
 
-init: init1 init2 init3 init4 init5 init6 init7
+init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09 init-10
 
 clearKH:
 
@@ -68,51 +68,58 @@ manage-password-123:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to_123'"
 
-init1:
+init-01:
 
 	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
 
-init2:
+init-02:
 
 	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:carlosrabelo/update-suap-pc.git ../cron; fi
 
-init3:
+init-03:
 
 	@mkdir -p env/
+
+init-04:
+
 	@mkdir -p lib/env
 	@mkdir -p lib/git
 	@mkdir -p lib/pip
 	@mkdir -p lib/ssh
 
-init4:
+init-05:
 
 	@cp lib/env/dba.txt .env-dba
 	@cp lib/env/red.txt .env-red
 	@cp lib/env/sql.txt .env-sql
 
-init5:
+init-06:
 
 	@cp ${HOME}/.gitconfig lib/git/gitconfig.txt
 
-init6:
+init-07:
 
 	@mkdir -p lib/ssh/
+
+init-08:
 
 	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
-init7:
+init-09:
 
 	@mkdir -p lib/pip/
 
+init-10:
+
 	@cp ../suap/requirements/*.txt lib/pip/
 
-compose-up: compose.ssh.m.yml compose.ssh.o.yml
+compose-up:
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
 
-compose-dw: compose.ssh.m.yml compose.ssh.o.yml
+compose-dw:
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
 
