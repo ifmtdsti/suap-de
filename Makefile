@@ -46,9 +46,10 @@ shell:
 
 virtual-env:
 
-	@-${SSH} "bash -l -c 'virtualenv -p python3 env'"
+	@-${SSH} "bash -l -c 'python -m virtualenv -p python3 --no-setuptools env'"
+	@-${SSH} "bash -l -c 'pip install setuptools==40.8.0'"
 
-pip-install:
+pip-install: virtual-env
 
 	@-${SSH} "bash -l -c 'pip install -r requirements/development.txt'"
 
