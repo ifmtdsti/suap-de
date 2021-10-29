@@ -65,7 +65,7 @@ manage-sync:
 
 	@-${SSH} "bash -l -c 'python manage.py sync'"
 
-manage-password-123:
+manage-password:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
 
