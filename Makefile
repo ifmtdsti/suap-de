@@ -20,7 +20,7 @@ stop-docker:
 
 	@sudo service docker stop
 
-start: compose-up clearKH
+start: compose-up clear-known-hosts
 
 stop: compose-dw
 
@@ -28,7 +28,7 @@ restart: stop start
 
 init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09 init-10
 
-clearKH:
+clear-known-hosts:
 
 	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
 
@@ -46,8 +46,7 @@ shell:
 
 virtual-env:
 
-	@-${SSH} "bash -l -c 'python -m virtualenv -p python3 --no-setuptools env'"
-	@-${SSH} "bash -l -c 'pip install setuptools==40.8.0'"
+	@-${SSH} "bash -l -c 'virtualenv -p python3 env'"
 
 pip-install: virtual-env
 
@@ -55,7 +54,7 @@ pip-install: virtual-env
 
 pip-uninstall:
 
-	@-${SSH} "bash -l -c 'deactivate && rm -fr ../env/*'"
+	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
 
 gunicorn:
 
