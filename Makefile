@@ -38,7 +38,7 @@ build:
 
 clear-images: stop
 
-	@docker rmi ifmt/suap-app ifmt/suap-ssh
+	@docker rmi -f ifmt/suap-app ifmt/suap-ssh
 
 shell:
 
