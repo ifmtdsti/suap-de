@@ -20,53 +20,19 @@ stop-docker:
 
 	@sudo service docker stop
 
-start: compose-up clear-known-hosts
+compose-start:
 
-stop: compose-dw
+	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
+
+compose-stop:
+
+	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
+
+start: compose-start clear-known-hosts
+
+stop: compose-stop
 
 restart: stop start
-
-init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09 init-10
-
-clear-known-hosts:
-
-	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
-
-build:
-
-	@docker build . --tag ifmt/suap-app --force-rm --no-cache
-
-clear-images: stop
-
-	@docker rmi -f ifmt/suap-app ifmt/suap-ssh
-
-shell:
-
-	@-${SSH}
-
-virtual-env:
-
-	@-${SSH} "bash -l -c 'virtualenv -p python3 env'"
-
-pip-install: virtual-env
-
-	@-${SSH} "bash -l -c 'pip install -r requirements/development.txt'"
-
-pip-uninstall:
-
-	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
-
-gunicorn:
-
-	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --bind=0.0.0.0:8000 --pid=../app.pid --workers=4 --daemon'"
-
-manage-sync:
-
-	@-${SSH} "bash -l -c 'python manage.py sync'"
-
-manage-password:
-
-	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
 
 init-01:
 
@@ -115,13 +81,7 @@ init-10:
 
 	@cp ../suap/requirements/*.txt lib/pip/
 
-compose-up:
-
-	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
-
-compose-dw:
-
-	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
+init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09 init-10
 
 set-linux1:
 
@@ -131,6 +91,56 @@ set-linux2:
 
 	@cp compose.ssh.2.linux.yml compose.ssh.o.yml
 
+set-linux: set-linux-1
+
 set-windows:
 
 	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
+
+shell:
+
+	@-${SSH}
+
+gunicorn:
+
+	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --bind=0.0.0.0:8000 --pid=../app.pid --workers=4 --daemon'"
+
+manage-sync:
+
+	@-${SSH} "bash -l -c 'python manage.py sync'"
+
+manage-password:
+
+	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
+
+build:
+
+	@docker build . --tag ifmt/suap-app --force-rm --no-cache
+
+clear-known-hosts:
+
+	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
+
+clear-images: stop
+
+	@docker rmi -f ifmt/suap-app ifmt/suap-ssh
+
+pip-install-01:
+
+	@-${SSH} "bash -l -c 'python -m venv env'"
+
+pip-install-02:
+
+	@-${SSH} "bash -l -c 'python -m pip install --upgrade pip'"
+
+pip-install-03:
+
+	@-${SSH} "bash -l -c 'python -m pip install wheel'"
+
+pip-install: pip-install-01 pip-install-02 pip-install-03
+
+	@-${SSH} "bash -l -c 'python -m pip install -r requirements/development.txt'"
+
+pip-uninstall:
+
+	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
