@@ -82,10 +82,10 @@ init-03:
 
 init-04:
 
-	@mkdir -p lib/env
-	@mkdir -p lib/git
-	@mkdir -p lib/pip
-	@mkdir -p lib/ssh
+	@mkdir -p lib/env/
+	@mkdir -p lib/git/
+	@mkdir -p lib/pip/
+	@mkdir -p lib/ssh/
 
 init-05:
 
@@ -103,13 +103,13 @@ init-07:
 
 init-08:
 
-	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
-	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
-	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
+	@mkdir -p lib/pip/
 
 init-09:
 
-	@mkdir -p lib/pip/
+	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
+	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
+	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
 init-10:
 
