@@ -14,22 +14,22 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Targets disponiveis para o make
 
-| Target              | Ação                                                   |
-|---------------------|--------------------------------------------------------|
-| build               | cria o container "suap-app", usado pelo pyCharm        |
-| init                | executa um git clone do repositorio suap para dentro da pasta src e cria arquivos de configuração para o bash |
-| start               | inicializa o containers suap-sql, suap-dba e suap-ssh  |
-| stop                | paraliza os containers suap-sql, suap-dba e suap-ssh   |
-| shell               | acessa o container via ssh                             |
-| gunicorn            | executa a aplicação suap                               |
-| manage-sync         | execute "manage.py sync"                               |
-| manage-password-123 | executa "manage.py set_passwords_to_123"               |
+| Target          | Ação                                                   |
+|-----------------|--------------------------------------------------------|
+| build           | cria o container "suap-app", usado pelo pyCharm        |
+| init            | executa um git clone dos repositorios "cron" e "suap" para dentro da pasta do projeto |
+| start           | inicializa o containers suap-sql, suap-dba e suap-ssh  |
+| stop            | paraliza os containers suap-sql, suap-dba e suap-ssh   |
+| shell           | acessa o container via ssh                             |
+| gunicorn        | executa a aplicação suap                               |
+| manage-sync     | execute "manage.py sync"                               |
+| manage-password | executa "manage.py set_passwords_to"                   |
 
 ## Configurações
 
 Antes de usar o ambiente é necessario que se crie/altere os arquivos de configuração dos containers:
 
-* .env-dba - configuração do phppgadmin
+* .env-dba - configuração do pgadmin
 * .env-red - configuração do redis
 * .env-sql - configuração do postgres
 
