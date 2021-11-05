@@ -139,7 +139,7 @@ pip-install-03:
 
 pip-install: pip-install-01 pip-install-02 pip-install-03
 
-	@-${SSH} "bash -l -c 'python -m pip install -r requirements/development.txt'"
+	@-${SSH} "bash -l -c 'python -m pip install -r requirements/production.txt -r requirements/development.txt'"
 
 pip-uninstall:
 
