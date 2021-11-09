@@ -44,44 +44,40 @@ init-02:
 
 init-03:
 
-	@mkdir -p env/
+	@cp ${HOME}/.gitconfig ../suap/.gitconfig
 
 init-04:
+
+	@cp lib/bashrc.txt ../suap/.bashrc
+
+init-05:
+
+	@mkdir -p env/
+
+init-06:
 
 	@mkdir -p lib/env/
 	@mkdir -p lib/git/
 	@mkdir -p lib/pip/
 	@mkdir -p lib/ssh/
 
-init-05:
+init-07:
 
 	@cp lib/env/dba.txt .env-dba
 	@cp lib/env/red.txt .env-red
 	@cp lib/env/sql.txt .env-sql
 
-init-06:
-
-	@cp ${HOME}/.gitconfig lib/git/gitconfig.txt
-
-init-07:
-
-	@mkdir -p lib/ssh/
-
 init-08:
-
-	@mkdir -p lib/pip/
-
-init-09:
 
 	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
-init-10:
+init-09:
 
 	@cp ../suap/requirements/*.txt lib/pip/
 
-init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09 init-10
+init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09
 
 set-linux1:
 
