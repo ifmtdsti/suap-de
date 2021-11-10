@@ -44,22 +44,22 @@ init-02:
 
 init-03:
 
-	@cp ${HOME}/.gitconfig ../suap/.gitconfig
+	@-mkdir -p env/
 
 init-04:
 
-	@cp lib/bashrc.txt ../suap/.bashrc
+	@-mkdir -p lib/env/
+	@-mkdir -p lib/git/
+	@-mkdir -p lib/pip/
+	@-mkdir -p lib/ssh/
 
 init-05:
 
-	@mkdir -p env/
+	@cp lib/bashrc.txt ../suap/.bashrc
 
 init-06:
 
-	@mkdir -p lib/env/
-	@mkdir -p lib/git/
-	@mkdir -p lib/pip/
-	@mkdir -p lib/ssh/
+	@cp lib/git/gitconfig.txt ../suap/.gitconfig
 
 init-07:
 
@@ -135,7 +135,7 @@ pip-install-03:
 
 pip-install: pip-install-01 pip-install-02 pip-install-03
 
-	@-${SSH} "bash -l -c 'python -m pip install -r requirements/production.txt -r requirements/development.txt'"
+	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
 
 pip-uninstall:
 
