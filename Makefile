@@ -98,7 +98,7 @@ shell:
 	@-${SSH}
 
 gunicorn:
-        @-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=deploy/logs/gunicorn/gunicorn1.log --daemon >>deploy/logs/gunicorn/gunicorn2.log'"
+	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=deploy/logs/gunicorn/gunicorn1.log --daemon >>deploy/logs/gunicorn/gunicorn2.log'"
 
 manage-sync:
 
