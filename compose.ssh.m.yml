@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.9"
 
 services:
 
@@ -79,7 +79,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ../suap
+      device: '${PWD}/../suap'
       o: bind
 
   ssh_env:
@@ -87,5 +87,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./env
+      device: '${PWD}/env'
       o: bind
