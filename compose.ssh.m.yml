@@ -26,7 +26,7 @@ services:
   dba:
     hostname: dba
     container_name: suap-dba
-    image: dpage/pgadmin4:5.6
+    image: dpage/pgadmin4:6.4
     restart: unless-stopped
     volumes:
       - dba:/var/lib/pgadmin
