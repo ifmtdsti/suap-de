@@ -122,7 +122,7 @@ clear-images: stop
 
 pip-install-01:
 
-	@-${SSH} "bash -l -c 'python -m venv env'"
+	@-${SSH} "bash -l -c 'cd /opt/suap && python -m venv env'"
 
 pip-install-02:
 
