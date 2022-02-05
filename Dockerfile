@@ -8,14 +8,7 @@ ENV LC_ALL=pt_BR.UTF-8
 
 RUN locale-gen pt_BR.UTF-8
 
-ADD ./lib/pip/base.txt /base.txt
-ADD ./lib/pip/development.txt /development.txt
-
-RUN \
-    python -m pip install --upgrade pip && \
-    python -m pip install setuptools==40.8.0 && \
-    python -m pip install -r /development.txt && \
-    rm /base.txt && \
-    rm /development.txt
+RUN python -m pip install --upgrade pip && \
+    python -m pip install setuptools==40.8.0
 
 EXPOSE 8000
