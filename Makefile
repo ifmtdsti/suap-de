@@ -34,50 +34,54 @@ stop: compose-stop
 
 restart: stop start
 
-init-01:
+init-a:
 
 	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
 
-init-02:
+init-b:
 
 	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-cron.git ../cron; fi
 
-init-03:
+init-c:
+
+	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-safe.git ../safe; fi
+
+init-d:
 
 	@-mkdir -p env/
 
-init-04:
+init-e:
 
 	@-mkdir -p lib/env/
 	@-mkdir -p lib/git/
 	@-mkdir -p lib/pip/
 	@-mkdir -p lib/ssh/
 
-init-05:
+init-f:
 
 	@cp lib/bashrc.txt ../suap/.bashrc
 
-init-06:
+init-g:
 
 	@cp lib/git/gitconfig.txt ../suap/.gitconfig
 
-init-07:
+init-h:
 
 	@cp lib/env/dba.txt .env-dba
 	@cp lib/env/red.txt .env-red
 	@cp lib/env/sql.txt .env-sql
 
-init-08:
+init-i:
 
 	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
-init-09:
+init-j:
 
 	@cp ../suap/requirements/*.txt lib/pip/
 
-init: init-01 init-02 init-03 init-04 init-05 init-06 init-07 init-08 init-09
+init: init-a init-b init-c init-d init-e init-f init-g init-h init-i init-j
 
 set-linux1:
 
