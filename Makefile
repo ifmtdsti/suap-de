@@ -28,7 +28,11 @@ compose-stop:
 
 	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
 
-start: compose-start clear-known-hosts
+known-hosts-clear:
+
+	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
+
+start: compose-start known-hosts-clear
 
 stop: compose-stop
 
@@ -36,52 +40,46 @@ restart: stop start
 
 init-a:
 
-	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
+	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git         ../suap; fi
+	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-cron.git ../cron; fi
+	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-safe.git ../safe; fi
 
 init-b:
 
-	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-cron.git ../cron; fi
-
-init-c:
-
-	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-safe.git ../safe; fi
-
-init-d:
-
 	@-mkdir -p env/
 
-init-e:
+init-c:
 
 	@-mkdir -p lib/env/
 	@-mkdir -p lib/git/
 	@-mkdir -p lib/pip/
 	@-mkdir -p lib/ssh/
 
-init-f:
+init-d:
 
 	@cp lib/bashrc.txt ../suap/.bashrc
 
-init-g:
+init-e:
 
 	@cp lib/git/gitconfig.txt ../suap/.gitconfig
 
-init-h:
+init-f:
 
 	@cp lib/env/dba.txt .env-dba
 	@cp lib/env/red.txt .env-red
 	@cp lib/env/sql.txt .env-sql
 
-init-i:
+init-g:
 
 	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
-init-j:
+init-h:
 
 	@cp ../suap/requirements/*.txt lib/pip/
 
-init: init-a init-b init-c init-d init-e init-f init-g init-h init-i init-j
+init: init-a init-b init-c init-d init-e init-f init-g init-h
 
 set-linux1:
 
@@ -101,8 +99,25 @@ shell:
 
 	@-${SSH}
 
-gunicorn:
-	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=deploy/logs/gunicorn/gunicorn1.log --daemon >>deploy/logs/gunicorn/gunicorn2.log'"
+pip-install-a:
+
+	@-${SSH} "bash -l -c 'cd /opt/suap && python -m venv env'"
+
+pip-install-b:
+
+	@-${SSH} "bash -l -c 'python -m pip install --upgrade pip'"
+
+pip-install-c:
+
+	@-${SSH} "bash -l -c 'python -m pip install wheel'"
+
+pip-install: pip-install-a pip-install-b pip-install-c
+
+	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
+
+pip-uninstall:
+
+	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
 
 manage-sync:
 
@@ -112,34 +127,14 @@ manage-password:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
 
+gunicorn:
+
+	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=/var/log/gunicorn1.log --daemon >> /var/log/gunicorn2.log'"
+
 build:
 
 	@docker build . --tag ifmt/suap-app --force-rm --no-cache
 
-clear-known-hosts:
-
-	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
-
-clear-images: stop
+images-clear: stop
 
 	@docker rmi -f ifmt/suap-app ifmt/suap-ssh
-
-pip-install-01:
-
-	@-${SSH} "bash -l -c 'cd /opt/suap && python -m venv env'"
-
-pip-install-02:
-
-	@-${SSH} "bash -l -c 'python -m pip install --upgrade pip'"
-
-pip-install-03:
-
-	@-${SSH} "bash -l -c 'python -m pip install wheel'"
-
-pip-install: pip-install-01 pip-install-02 pip-install-03
-
-	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
-
-pip-uninstall:
-
-	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
