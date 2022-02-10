@@ -129,7 +129,7 @@ manage-password:
 
 gunicorn:
 
-	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=/var/log/gunicorn1.log --daemon >> /var/log/gunicorn2.log'"
+	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=gunicorn1.log --daemon >> gunicorn2.log'"
 
 build:
 
