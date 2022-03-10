@@ -41,7 +41,7 @@ services:
   red:
     hostname: red
     container_name: suap-red
-    image: bitnami/redis:4.0.9
+    image: bitnami/redis:6.0.16
     restart: unless-stopped
     volumes:
       - red:/bitnami/redis/data
