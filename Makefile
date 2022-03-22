@@ -20,21 +20,21 @@ stop-docker:
 
 	@sudo service docker stop
 
-compose-start:
+start-compose:
 
 	@docker-compose --file compose.m.yml --file compose.o.yml up --remove-orphans --build --detach
 
-compose-stop:
+stop-compose:
 
 	@docker-compose --file compose.m.yml --file compose.o.yml down --remove-orphans --volumes
 
-known-hosts-clear:
+clear-known-hosts:
 
 	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
 
-start: compose-start known-hosts-clear
+start: start-compose clear-known-hosts
 
-stop: compose-stop
+stop: stop-compose
 
 restart: stop start
 
@@ -95,27 +95,23 @@ set-windows:
 
 	@cp compose.0.windows.yml compose.o.yml
 
-shell:
-
-	@-${SSH}
-
-pip-install-a:
+install-pip-a:
 
 	@-${SSH} "bash -l -c 'cd /opt/suap && python -m venv env'"
 
-pip-install-b:
+install-pip-b:
 
 	@-${SSH} "bash -l -c 'python -m pip install --upgrade pip'"
 
-pip-install-c:
+install-pip-c:
 
 	@-${SSH} "bash -l -c 'python -m pip install wheel'"
 
-pip-install: pip-install-a pip-install-b pip-install-c
+install-pip: install-pip-a install-pip-b install-pip-c
 
 	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
 
-pip-uninstall:
+uninstall-pip:
 
 	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
 
@@ -127,6 +123,10 @@ manage-password:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
 
+shell:
+
+	@-${SSH}
+
 gunicorn:
 
 	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=gunicorn1.log --daemon >> gunicorn2.log'"
@@ -135,6 +135,6 @@ build:
 
 	@docker build . --file Dockerfile.ide --tag ifmt/suap-ide --force-rm --no-cache
 
-images-clear: stop
+clear-image: stop
 
-	@docker rmi -f ifmt/suap-ide ifmt/suap-ssh
+	@docker rmi -f ifmt/suap-app
