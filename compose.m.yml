@@ -2,20 +2,21 @@ version: "3.9"
 
 services:
 
-  ssh:
-    hostname: ssh
-    container_name: suap-ssh
+  app:
+    hostname: app
+    container_name: suap-app
     build:
       context: .
-      dockerfile: Dockerfile.ssh
-    image: ifmt/suap-ssh
+      dockerfile: Dockerfile
+    image: ifmt/suap-app
     restart: unless-stopped
     volumes:
-      - ssh_app:/opt/suap/app
-      - ssh_env:/opt/suap/env
+      - app_app:/opt/suap/app
+      - app_env:/opt/suap/env
     ports:
-      - "8022:22"
-      - "8080:8000"
+      - 8000:8000
+      - 8022:22
+      - 8080:8080
     networks:
       - net
     depends_on:
@@ -31,8 +32,8 @@ services:
     volumes:
       - dba:/var/lib/pgadmin
     ports:
-      - "8480:80"
-      - "8443:443"
+      - 8443:443
+      - 8480:80
     networks:
       - net
     env_file:
@@ -46,7 +47,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     ports:
-      - "6379:6379"
+      - 6379:6379
     networks:
       - net
     env_file:
@@ -74,16 +75,16 @@ networks:
 
 volumes:
 
-  ssh_app:
-    name: suap-ssh-app
+  app_app:
+    name: suap-app-app
     driver: local
     driver_opts:
       type: none
       device: '${PWD}/../suap'
       o: bind
 
-  ssh_env:
-    name: suap-ssh-env
+  app_env:
+    name: suap-app-env
     driver: local
     driver_opts:
       type: none
