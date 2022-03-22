@@ -22,11 +22,11 @@ stop-docker:
 
 compose-start:
 
-	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml up --remove-orphans --build --detach
+	@docker-compose --file compose.m.yml --file compose.o.yml up --remove-orphans --build --detach
 
 compose-stop:
 
-	@docker-compose --file compose.ssh.m.yml --file compose.ssh.o.yml down --remove-orphans --volumes
+	@docker-compose --file compose.m.yml --file compose.o.yml down --remove-orphans --volumes
 
 known-hosts-clear:
 
@@ -83,17 +83,17 @@ init: init-a init-b init-c init-d init-e init-f init-g init-h
 
 set-linux1:
 
-	@cp compose.ssh.1.linux.yml compose.ssh.o.yml
+	@cp compose.1.linux.yml compose.o.yml
 
 set-linux2:
 
-	@cp compose.ssh.2.linux.yml compose.ssh.o.yml
+	@cp compose.2.linux.yml compose.o.yml
 
 set-linux: set-linux-1
 
 set-windows:
 
-	@cp compose.ssh.0.windows.yml compose.ssh.o.yml
+	@cp compose.0.windows.yml compose.o.yml
 
 shell:
 
@@ -133,8 +133,8 @@ gunicorn:
 
 build:
 
-	@docker build . --tag ifmt/suap-app --force-rm --no-cache
+	@docker build . --file Dockerfile.ide --tag ifmt/suap-ide --force-rm --no-cache
 
 images-clear: stop
 
-	@docker rmi -f ifmt/suap-app ifmt/suap-ssh
+	@docker rmi -f ifmt/suap-ide ifmt/suap-ssh
