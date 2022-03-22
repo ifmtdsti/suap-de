@@ -109,7 +109,7 @@ install-pip: install-pip-a install-pip-b install-pip-c
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/app/.env/*'"
+	@-${SSH} "bash -l -c 'deactivate && rm -fr .env/*'"
 
 manage-sync:
 
@@ -119,18 +119,14 @@ manage-password:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
 
+start-gunicorn:
+
+	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --pid=/tmp/suap.pid --log-file=/tmp/gunicorn1.log --daemon >> /tmp/gunicorn2.log'"
+
+stop-gunicorn:
+
+	@-${SSH} "bash -l -c 'pkill -F /tmp/suap.pid'"
+
 shell:
 
 	@-${SSH}
-
-gunicorn:
-
-	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=~/app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=~/app/gunicorn1.log --daemon >> ~/app/gunicorn2.log'"
-
-build:
-
-	@docker build . --file Dockerfile.ide --tag ifmt/suap-ide --force-rm --no-cache
-
-clear-image: stop
-
-	@docker rmi -f ifmt/suap-app
