@@ -109,7 +109,7 @@ install-pip: install-pip-a install-pip-b install-pip-c
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/env/*'"
+	@-${SSH} "bash -l -c 'deactivate && rm -fr /opt/suap/app/.env/*'"
 
 manage-sync:
 
