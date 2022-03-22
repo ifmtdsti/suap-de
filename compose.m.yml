@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - app_app:/opt/suap/app
-      - app_env:/opt/suap/env
+      - app_env:/opt/suap/app/.env
     ports:
       - 8000:8000
       - 8022:22

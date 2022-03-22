@@ -16,10 +16,9 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 #
-if [ -f "$HOME/env/bin/activate" ] ; then
-    source $HOME/env/bin/activate
+if [ -f "$HOME/app/.env/bin/activate" ] ; then
+    source $HOME/app/.env/bin/activate
     cd $HOME/app
-    export HOME=$HOME/app
 fi
 
 export PGHOST=sql

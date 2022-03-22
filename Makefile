@@ -97,7 +97,7 @@ set-windows:
 
 install-pip-a:
 
-	@-${SSH} "bash -l -c 'cd /opt/suap && python -m venv env'"
+	@-${SSH} "bash -l -c 'cd /opt/suap/app && python -m venv .env'"
 
 install-pip-b:
 
