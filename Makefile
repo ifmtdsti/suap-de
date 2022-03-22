@@ -57,11 +57,13 @@ init-c:
 
 init-d:
 
-	@cp lib/bashrc.txt ../suap/.bashrc
+	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
+	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
+	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
 init-e:
 
-	@cp lib/git/gitconfig.txt ../suap/.gitconfig
+	@cp ../suap/requirements/*.txt lib/pip/
 
 init-f:
 
@@ -71,15 +73,9 @@ init-f:
 
 init-g:
 
-	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
-	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
-	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
+	@cp lib/git/gitconfig.txt ../suap/.gitconfig
 
-init-h:
-
-	@cp ../suap/requirements/*.txt lib/pip/
-
-init: init-a init-b init-c init-d init-e init-f init-g init-h
+init: init-a init-b init-c init-d init-e init-f init-g
 
 set-linux1:
 
@@ -129,7 +125,7 @@ shell:
 
 gunicorn:
 
-	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=../app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=gunicorn1.log --daemon >> gunicorn2.log'"
+	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --pid=~/app.pid --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --log-file=~/app/gunicorn1.log --daemon >> ~/app/gunicorn2.log'"
 
 build:
 

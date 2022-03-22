@@ -8,4 +8,4 @@ env/
 .env-sql
 
 #
-compose.ssh.o.yml
+compose.o.yml
