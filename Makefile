@@ -67,9 +67,9 @@ init-e:
 
 init-f:
 
-	@cp lib/env/dba.txt .env-dba
-	@cp lib/env/red.txt .env-red
-	@cp lib/env/sql.txt .env-sql
+	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
+	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
+	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
 init-g:
 

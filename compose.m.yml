@@ -19,6 +19,8 @@ services:
       - '8080:8080'
     networks:
       - net
+    env_file:
+      - .env-dba
     depends_on:
       - dba
       - red

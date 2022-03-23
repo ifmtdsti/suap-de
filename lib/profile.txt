@@ -21,7 +21,12 @@ if [ -f "$HOME/app/.env/bin/activate" ] ; then
     cd $HOME/app
 fi
 
+#
+if [ -f "$HOME/app/.vscode/password.sh" ] ; then
+    source $HOME/app/.vscode/password.sh
+fi
+
+#
 export PGHOST=sql
 export PGUSER=postgres
 export PGPASSWORD=postgres
-export PASSWORD=devsuap
