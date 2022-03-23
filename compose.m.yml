@@ -14,9 +14,9 @@ services:
       - app_app:/opt/suap/app
       - app_env:/opt/suap/app/.env
     ports:
-      - 8000:8000
-      - 8022:22
-      - 8080:8080
+      - '8000:8000'
+      - '8022:22'
+      - '8080:8080'
     networks:
       - net
     depends_on:
@@ -32,8 +32,8 @@ services:
     volumes:
       - dba:/var/lib/pgadmin
     ports:
-      - 8443:443
-      - 8480:80
+      - '8443:443'
+      - '8480:80'
     networks:
       - net
     env_file:
@@ -47,7 +47,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     ports:
-      - 6379:6379
+      - '6379:6379'
     networks:
       - net
     env_file:
@@ -61,7 +61,7 @@ services:
     volumes:
       - sql:/bitnami/postgresql
     ports:
-      - "5432:5432"
+      - '5432:5432'
     networks:
       - net
     env_file:
