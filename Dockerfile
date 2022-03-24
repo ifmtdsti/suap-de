@@ -16,6 +16,7 @@ USER suap
 
 WORKDIR /opt/suap
 
+ADD --chown=suap:suap lib/bash_aliases.txt    .bash_aliases
 ADD --chown=suap:suap lib/bashrc.txt          .bashrc
 ADD --chown=suap:suap lib/profile.txt         .profile
 ADD --chown=suap:suap lib/ssh/id_rsa          .ssh/id_rsa
