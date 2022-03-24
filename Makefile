@@ -47,6 +47,8 @@ init-a:
 init-b:
 
 	@-mkdir -p env/
+	@-mkdir -p lib/
+	@-mkdir -p vcs/
 
 init-c:
 

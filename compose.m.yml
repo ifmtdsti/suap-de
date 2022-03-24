@@ -11,6 +11,7 @@ services:
     image: ifmt/suap-app
     restart: unless-stopped
     volumes:
+      - app_vcs:/opt/suap/.local/share/code-server
       - app_app:/opt/suap/app
       - app_env:/opt/suap/app/.env
     ports:
@@ -91,4 +92,12 @@ volumes:
     driver_opts:
       type: none
       device: '${PWD}/env'
+      o: bind
+
+  app_vcs:
+    name: suap-app-vcs
+    driver: local
+    driver_opts:
+      type: none
+      device: '${PWD}/vcs'
       o: bind
