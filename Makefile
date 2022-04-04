@@ -70,12 +70,13 @@ init-e:
 init-f:
 
 	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
+	@-if [ ! -f ".env-git" ] ; then cp lib/env/git.txt .env-git; fi
 	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
 	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
 init-g:
 
-	@cp lib/git/gitconfig.txt ../suap/.gitconfig
+	@cp .env-git ../suap/.gitconfig
 
 init: init-a init-b init-c init-d init-e init-f init-g
 
