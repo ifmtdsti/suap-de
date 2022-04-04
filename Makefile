@@ -20,7 +20,11 @@ stop-docker:
 
 	@sudo service docker stop
 
-start-compose:
+pull-docker:
+
+	@docker pull ifmt/suap-os:latest
+
+start-compose: pull-docker
 
 	@docker-compose --file compose.m.yml --file compose.o.yml up --remove-orphans --build --detach
 
@@ -74,11 +78,7 @@ init-f:
 	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
 	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
-init-g:
-
-	@cp .env-git ../suap/.gitconfig
-
-init: init-a init-b init-c init-d init-e init-f init-g
+init: init-a init-b init-c init-d init-e init-f
 
 set-linux1:
 

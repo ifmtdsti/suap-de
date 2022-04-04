@@ -16,13 +16,13 @@ USER suap
 
 WORKDIR /opt/suap
 
+ADD --chown=suap:suap .env-git                 app/.gitconfig
 ADD --chown=suap:suap lib/bash_aliases.txt    .bash_aliases
 ADD --chown=suap:suap lib/bashrc.txt          .bashrc
 ADD --chown=suap:suap lib/profile.txt         .profile
 ADD --chown=suap:suap lib/ssh/id_rsa          .ssh/id_rsa
 ADD --chown=suap:suap lib/ssh/id_rsa.pub      .ssh/id_rsa.pub
 ADD --chown=suap:suap lib/ssh/authorized_keys .ssh/authorized_keys
-ADD --chown=suap:suap lib/git/gitconfig.txt   app/.gitconfig
 
 RUN code-server --install-extension ms-python.python
 
