@@ -3,6 +3,7 @@ env/
 
 #
 .env-dba
+.env-git
 .env-lda
 .env-red
 .env-sql
