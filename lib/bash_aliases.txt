@@ -1,9 +1,5 @@
 #
-alias set-git-config-home='git config user.name "Carlos Rabelo" && git config user.email "developer@carlosrabelo.com.br"'
-alias set-git-config-work='git config user.name "Carlos Rabelo" && git config user.email "carlos.rabelo@ifmt.edu.br"'
-
-#
 alias git-fetch-all-pull='git fetch --all --prune && git pull origin $(git branch | sed -n -e "s/^\* \(.*\)/\1/p")'
 
 #
-alias git-clean-reset-fetch='git fetch origin && git reset --hard origin/master && git clean -f -d'
+alias git-fetch-reset-clean='git fetch origin && git reset --hard origin/master && git clean -f -d'
