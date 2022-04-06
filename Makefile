@@ -57,7 +57,6 @@ init-b:
 init-c:
 
 	@-mkdir -p lib/env/
-	@-mkdir -p lib/git/
 	@-mkdir -p lib/pip/
 	@-mkdir -p lib/ssh/
 
