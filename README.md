@@ -14,7 +14,7 @@ Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
 
 ## Inicialização
 
-#### Crie as chaves ssh antes de executar qualquer um dos comandos abaixo
+#### Atenção: Crie a chave ssh antes de executar qualquer um dos comandos abaixo
 
 A primeira tarefa a fazer é baixar o projeto via:
 
