@@ -62,13 +62,14 @@ init-c:
 
 init-d:
 
-	@cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
-	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
-	@cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
+	@-cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
+	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
+	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
 init-e:
 
-	@cp ../suap/requirements/*.txt lib/pip/
+	@-rm lib/pip/*.txt
+	@-cp ../suap/requirements/*.txt lib/pip/
 
 init-f:
 
