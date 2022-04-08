@@ -2,6 +2,7 @@
 .gitignore
 
 env/
+vcs/
 
 Dockerfile
 Makefile
