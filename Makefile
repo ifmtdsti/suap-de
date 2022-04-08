@@ -12,35 +12,17 @@ endif
 
 all:
 
-start-docker:
+init: init-a init-b init-c init-d init-e
 
-	@sudo service docker start
-
-stop-docker:
-
-	@sudo service docker stop
-
-pull-docker:
-
-	@docker pull ifmt/suap-os:latest
-
-start-compose: pull-docker
-
-	@docker-compose --file compose.m.yml --file compose.o.yml up --remove-orphans --build --detach
-
-stop-compose:
-
-	@docker-compose --file compose.m.yml --file compose.o.yml down --remove-orphans --volumes
-
-clear-known-hosts:
-
-	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
-
-start: start-compose clear-known-hosts
+start: clear-known-hosts start-compose
 
 stop: stop-compose
 
 restart: stop start
+
+shell:
+
+	@-${SSH}
 
 init-a:
 
@@ -52,13 +34,17 @@ init-b:
 
 	@-mkdir -p env/
 	@-mkdir -p lib/
+	@-mkdir -p lib/env/
+	@-mkdir -p lib/git/
+	@-mkdir -p lib/ssh/
 	@-mkdir -p vcs/
 
 init-c:
 
-	@-mkdir -p lib/env/
-	@-mkdir -p lib/pip/
-	@-mkdir -p lib/ssh/
+	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
+	@-if [ ! -f ".env-git" ] ; then cp lib/env/git.txt .env-git; fi
+	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
+	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
 init-d:
 
@@ -68,17 +54,24 @@ init-d:
 
 init-e:
 
-	@-rm lib/pip/*.txt
-	@-cp ../suap/requirements/*.txt lib/pip/
+	@-install -D lib/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
+	@-install -D lib/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
 
-init-f:
+clear-known-hosts:
 
-	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
-	@-if [ ! -f ".env-git" ] ; then cp lib/env/git.txt .env-git; fi
-	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
-	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
+	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
 
-init: init-a init-b init-c init-d init-e init-f
+start-compose: pull-docker
+
+	@docker-compose --file compose.m.yml --file compose.o.yml up --remove-orphans --build --detach
+
+stop-compose:
+
+	@docker-compose --file compose.m.yml --file compose.o.yml down --remove-orphans --volumes
+
+pull-docker:
+
+	@docker pull ifmt/suap-os:latest
 
 set-linux1:
 
@@ -94,6 +87,18 @@ set-windows:
 
 	@cp compose.0.windows.yml compose.o.yml
 
+start-docker:
+
+	@sudo service docker start
+
+stop-docker:
+
+	@sudo service docker stop
+
+install-pip: install-pip-a install-pip-b install-pip-c
+
+	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
+
 install-pip-a:
 
 	@-${SSH} "bash -l -c 'cd /opt/suap/app && python -m venv .env'"
@@ -106,13 +111,9 @@ install-pip-c:
 
 	@-${SSH} "bash -l -c 'python -m pip install wheel'"
 
-install-pip: install-pip-a install-pip-b install-pip-c
-
-	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
-
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'deactivate && rm -fr .env/*'"
+	@-${SSH} "bash -l -c 'cd /opt/suap/app && deactivate && rm -fr .env/*'"
 
 manage-sync:
 
@@ -124,12 +125,8 @@ manage-password:
 
 start-gunicorn:
 
-	@-${SSH} "bash -l -c 'gunicorn suap.wsgi:application --bind=0.0.0.0:8000 --workers=`nproc` --timeout=1800 --pid=/tmp/suap.pid --log-file=/tmp/gunicorn1.log --daemon >> /tmp/gunicorn2.log'"
+	@-${SSH} "bash -l -c '.local/bin/start-gunicorn.sh'"
 
 stop-gunicorn:
 
-	@-${SSH} "bash -l -c 'pkill -F /tmp/suap.pid'"
-
-shell:
-
-	@-${SSH}
+	@-${SSH} "bash -l -c '.local/bin/stop-gunicorn.sh'"

@@ -27,6 +27,6 @@ if [ -f "$HOME/app/.vscode/password.sh" ] ; then
 fi
 
 #
-export PGHOST=sql
+export PGHOST=suap-sql
 export PGUSER=postgres
 export PGPASSWORD=postgres
