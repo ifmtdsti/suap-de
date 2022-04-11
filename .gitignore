@@ -7,6 +7,3 @@
 .env-lda
 .env-red
 .env-sql
-
-#
-compose.o.yml

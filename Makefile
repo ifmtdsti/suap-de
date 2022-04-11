@@ -73,20 +73,6 @@ pull-docker:
 
 	@docker pull ifmt/suap-os:latest
 
-set-linux1:
-
-	@cp compose.1.linux.yml compose.o.yml
-
-set-linux2:
-
-	@cp compose.2.linux.yml compose.o.yml
-
-set-linux: set-linux-1
-
-set-windows:
-
-	@cp compose.0.windows.yml compose.o.yml
-
 start-docker:
 
 	@sudo service docker start

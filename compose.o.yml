@@ -5,7 +5,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /opt/suap/2/dba
+      device: $HOME/.opt/suap/dba
       o: bind
 
   red:
@@ -13,7 +13,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /opt/suap/2/red
+      device: $HOME/.opt/suap/red
       o: bind
 
   sql:
@@ -21,5 +21,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /opt/suap/2/sql
+      device: $HOME/.opt/suap/sql
       o: bind
