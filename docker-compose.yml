@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 
 services:
 
@@ -15,9 +15,9 @@ services:
       - app_env:/opt/suap/app/.env
       - app_vcs:/opt/suap/.local/share/code-server
     ports:
-      - 8000:8000
-      - 8022:22
-      - 8080:8080
+      - '8000:8000'
+      - '8022:22'
+      - '8080:8080'
     networks:
       - net
     env_file:
@@ -35,8 +35,8 @@ services:
     volumes:
       - dba:/var/lib/pgadmin
     ports:
-      - 8443:443
-      - 8480:80
+      - '8443:443'
+      - '8480:80'
     networks:
       - net
     env_file:
@@ -50,7 +50,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     ports:
-      - 6379:6379
+      - '6379:6379'
     networks:
       - net
     env_file:
