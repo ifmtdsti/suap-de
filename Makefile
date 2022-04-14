@@ -1,13 +1,9 @@
 USER := suap
 
 ifeq ($(OS), Windows_NT)
-
     SSH=ssh -p 8022 ${USER}@localhost
-
 else
-
     SSH=sshpass -p${USER} ssh -p 8022 ${USER}@localhost
-
 endif
 
 all:
