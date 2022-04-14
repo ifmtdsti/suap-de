@@ -1,16 +1,15 @@
-USER := suap
 
 ifeq ($(OS), Windows_NT)
-    SSH=ssh -p 8022 ${USER}@localhost
+    SSH=ssh -p 8022 suap@localhost
 else
-    SSH=sshpass -p${USER} ssh -p 8022 ${USER}@localhost
+    SSH=sshpass -psuap ssh -p 8022 suap@localhost
 endif
 
 all:
 
-init: init-a init-b init-c init-d init-e init-f
+init: init-1 init-2 init-3 init-4 init-5 init-6
 
-start: clear-known-hosts start-compose
+start: clear-knownhost start-compose
 
 stop: stop-compose
 
@@ -20,16 +19,13 @@ shell:
 
 	@-${SSH}
 
-init-a:
+init-1:
 
-	@-if [ ! -d "../${USER}" ] ; then git clone git@gitlab.ifmt.edu.br:csn/${USER}.git ../${USER}; fi
+	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
+	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-cron.git ../cron; fi
+	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-safe.git ../safe; fi
 
-init-b:
-
-	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/${USER}-pc-cron.git ../cron; fi
-	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/${USER}-pc-safe.git ../safe; fi
-
-init-c:
+init-2:
 
 	@-mkdir -p env/
 	@-mkdir -p lib/
@@ -38,39 +34,43 @@ init-c:
 	@-mkdir -p lib/ssh/
 	@-mkdir -p vcs/
 
-init-d:
+init-3:
+
+	@-if [ ! -f .env ] ; then echo "BASE=${HOME}/.opt/suap" > .env; fi
+
+init-4:
 
 	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
 	@-if [ ! -f ".env-git" ] ; then cp lib/env/git.txt .env-git; fi
 	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
 	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
-init-e:
+init-5:
 
 	@-cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
-init-f:
+init-6:
 
-	@-install -D lib/start-gunicorn.sh ../${USER}/.local/bin/start-gunicorn.sh
-	@-install -D lib/stop-gunicorn.sh  ../${USER}/.local/bin/stop-gunicorn.sh
+	@-install -D lib/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
+	@-install -D lib/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
 
-clear-known-hosts:
+clear-knownhost:
 
 	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
 
 start-compose: pull-docker
 
-	@docker-compose --file compose.m.yml --file compose.o.yml up --remove-orphans --build --detach
+	@docker-compose up --remove-orphans --build --detach
 
 stop-compose:
 
-	@docker-compose --file compose.m.yml --file compose.o.yml down --remove-orphans --volumes
+	@docker-compose down --remove-orphans --volumes
 
 pull-docker:
 
-	@docker pull ifmt/${USER}-os:latest
+	@docker pull ifmt/suap-os:latest
 
 start-docker:
 
@@ -80,25 +80,25 @@ stop-docker:
 
 	@sudo service docker stop
 
-install-pip: install-pip-a install-pip-b install-pip-c
+install-pip: install-pip-1 install-pip-2 install-pip-3
 
 	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
 
-install-pip-a:
+install-pip-1:
 
-	@-${SSH} "bash -l -c 'cd /opt/${USER}/app && python -m venv .env'"
+	@-${SSH} "bash -l -c 'cd /opt/suap/app && python -m venv .env'"
 
-install-pip-b:
+install-pip-2:
 
 	@-${SSH} "bash -l -c 'python -m pip install --upgrade pip'"
 
-install-pip-c:
+install-pip-3:
 
 	@-${SSH} "bash -l -c 'python -m pip install wheel'"
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'cd /opt/${USER}/app && deactivate && rm -fr .env/*'"
+	@-${SSH} "bash -l -c 'cd /opt/suap/app && deactivate && rm -fr .env/*'"
 
 manage-sync:
 

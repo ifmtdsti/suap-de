@@ -11,13 +11,13 @@ services:
     image: ifmt/suap-app
     restart: unless-stopped
     volumes:
-      - app_vcs:/opt/suap/.local/share/code-server
       - app_app:/opt/suap/app
       - app_env:/opt/suap/app/.env
+      - app_vcs:/opt/suap/.local/share/code-server
     ports:
-      - '8000:8000'
-      - '8022:22'
-      - '8080:8080'
+      - 8000:8000
+      - 8022:22
+      - 8080:8080
     networks:
       - net
     env_file:
@@ -35,8 +35,8 @@ services:
     volumes:
       - dba:/var/lib/pgadmin
     ports:
-      - '8443:443'
-      - '8480:80'
+      - 8443:443
+      - 8480:80
     networks:
       - net
     env_file:
@@ -50,7 +50,7 @@ services:
     volumes:
       - red:/bitnami/redis/data
     ports:
-      - '6379:6379'
+      - 6379:6379
     networks:
       - net
     env_file:
@@ -64,7 +64,7 @@ services:
     volumes:
       - sql:/bitnami/postgresql
     ports:
-      - '5432:5432'
+      - 5432:5432
     networks:
       - net
     env_file:
@@ -83,7 +83,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '${PWD}/../suap'
+      device: ${PWD}/../suap
       o: bind
 
   app_env:
@@ -91,7 +91,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '${PWD}/env'
+      device: ${PWD}/env
       o: bind
 
   app_vcs:
@@ -99,5 +99,29 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '${PWD}/vcs'
+      device: ${PWD}/vcs
+      o: bind
+
+  dba:
+    name: suap-dba
+    driver: local
+    driver_opts:
+      type: none
+      device: ${BASE}/dba
+      o: bind
+
+  red:
+    name: suap-red
+    driver: local
+    driver_opts:
+      type: none
+      device: ${BASE}/red
+      o: bind
+
+  sql:
+    name: suap-sql
+    driver: local
+    driver_opts:
+      type: none
+      device: ${BASE}/sql
       o: bind
