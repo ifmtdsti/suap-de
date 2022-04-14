@@ -12,7 +12,7 @@ endif
 
 all:
 
-init: init-a init-b init-c init-d init-e
+init: init-a init-b init-c init-d init-e init-f
 
 start: clear-known-hosts start-compose
 
@@ -26,11 +26,14 @@ shell:
 
 init-a:
 
-	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git         ../suap; fi
-	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-cron.git ../cron; fi
-	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-pc-safe.git ../safe; fi
+	@-if [ ! -d "../${USER}" ] ; then git clone git@gitlab.ifmt.edu.br:csn/${USER}.git ../${USER}; fi
 
 init-b:
+
+	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/${USER}-pc-cron.git ../cron; fi
+	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/${USER}-pc-safe.git ../safe; fi
+
+init-c:
 
 	@-mkdir -p env/
 	@-mkdir -p lib/
@@ -39,23 +42,23 @@ init-b:
 	@-mkdir -p lib/ssh/
 	@-mkdir -p vcs/
 
-init-c:
+init-d:
 
 	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
 	@-if [ ! -f ".env-git" ] ; then cp lib/env/git.txt .env-git; fi
 	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
 	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
-init-d:
+init-e:
 
 	@-cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
 	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
 	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
 
-init-e:
+init-f:
 
-	@-install -D lib/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
-	@-install -D lib/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
+	@-install -D lib/start-gunicorn.sh ../${USER}/.local/bin/start-gunicorn.sh
+	@-install -D lib/stop-gunicorn.sh  ../${USER}/.local/bin/stop-gunicorn.sh
 
 clear-known-hosts:
 
@@ -71,7 +74,7 @@ stop-compose:
 
 pull-docker:
 
-	@docker pull ifmt/suap-os:latest
+	@docker pull ifmt/${USER}-os:latest
 
 start-docker:
 
@@ -87,7 +90,7 @@ install-pip: install-pip-a install-pip-b install-pip-c
 
 install-pip-a:
 
-	@-${SSH} "bash -l -c 'cd /opt/suap/app && python -m venv .env'"
+	@-${SSH} "bash -l -c 'cd /opt/${USER}/app && python -m venv .env'"
 
 install-pip-b:
 
@@ -99,7 +102,7 @@ install-pip-c:
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'cd /opt/suap/app && deactivate && rm -fr .env/*'"
+	@-${SSH} "bash -l -c 'cd /opt/${USER}/app && deactivate && rm -fr .env/*'"
 
 manage-sync:
 
