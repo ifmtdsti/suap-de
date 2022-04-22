@@ -13,7 +13,8 @@ services:
     volumes:
       - app_app:/opt/suap/app
       - app_env:/opt/suap/app/.env
-      - app_vcs:/opt/suap/.local/share/code-server
+      - app_con:/opt/suap/.config
+      - app_loc:/opt/suap/.local
     ports:
       - '8000:8000'
       - '8022:22'
@@ -94,12 +95,20 @@ volumes:
       device: ${PWD}/env
       o: bind
 
-  app_vcs:
-    name: suap-app-vcs
+  app_con:
+    name: suap-app-con
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/vcs
+      device: ${PWD}/vol/con
+      o: bind
+
+  app_loc:
+    name: suap-app-loc
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/vol/loc
       o: bind
 
   dba:
