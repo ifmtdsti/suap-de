@@ -1,3 +1,0 @@
-[user]
-	email = nome.sobrenome@ifmt.edu.br
-	name = Nome Sobrenome

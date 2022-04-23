@@ -28,9 +28,7 @@ init-1:
 init-2:
 
 	@-mkdir -p env/
-	@-mkdir -p lib/
 	@-mkdir -p lib/env/
-	@-mkdir -p lib/git/
 	@-mkdir -p lib/ssh/
 	@-mkdir -p vol/con/
 	@-mkdir -p vol/loc/
@@ -42,7 +40,6 @@ init-3:
 init-4:
 
 	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
-	@-if [ ! -f ".env-git" ] ; then cp lib/env/git.txt .env-git; fi
 	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
 	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
 
@@ -63,7 +60,7 @@ clear-knownhost:
 
 start-compose: pull-docker
 
-	@docker-compose up --remove-orphans --build --detach
+	@docker-compose up --build --detach --force-recreate --remove-orphans
 
 stop-compose:
 
