@@ -32,7 +32,7 @@ init-2:
 	@-mkdir -p lib/env/
 	@-mkdir -p lib/git/
 	@-mkdir -p lib/ssh/
-	@-mkdir -p vol/col/
+	@-mkdir -p vol/con/
 	@-mkdir -p vol/loc/
 
 init-3:
