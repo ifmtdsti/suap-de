@@ -2,18 +2,16 @@
 .gitignore
 
 env/
-vcs/
+vol/
+
+.env-dba
+.env-git
+.env-red
+.env-sql
 
 Dockerfile
 Makefile
+
 README.md
 
-docker-compose.1.yml
-docker-compose.2.yml
-docker-compose.override.yml
 docker-compose.yml
-
-.env-dba
-.env-lda
-.env-red
-.env-sql
