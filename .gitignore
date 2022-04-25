@@ -1,6 +1,5 @@
 #
 .env
 .env-dba
-.env-git
 .env-red
 .env-sql
