@@ -98,6 +98,10 @@ uninstall-pip:
 
 	@-${SSH} "bash -l -c 'cd /opt/suap/app && deactivate && rm -fr .env/*'"
 
+manage-migrate:
+
+	@-${SSH} "bash -l -c 'python manage.py migrate'"
+
 manage-sync:
 
 	@-${SSH} "bash -l -c 'python manage.py sync'"
@@ -105,6 +109,8 @@ manage-sync:
 manage-password:
 
 	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
+
+restart-gunicorn: stop-gunicorn start-gunicorn
 
 start-gunicorn:
 
