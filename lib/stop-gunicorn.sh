@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if [ "$HOSTNAME" != "app" ] ; then
     exit 0
 fi
