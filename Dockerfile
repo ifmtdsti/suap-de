@@ -1,5 +1,7 @@
 FROM ifmt/suap-os:latest
 
+ARG CACHE_BUST=1
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV LANG=pt_BR.UTF-8
