@@ -12,7 +12,6 @@ services:
     restart: unless-stopped
     volumes:
       - app_app:/opt/suap/app
-      - app_env:/opt/suap/env
       - app_con:/opt/suap/.config
       - app_loc:/opt/suap/.local
     ports:
