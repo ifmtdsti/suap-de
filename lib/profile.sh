@@ -16,14 +16,14 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 #
-if [ -f "$HOME/app/.env/bin/activate" ] ; then
-    source $HOME/app/.env/bin/activate
-    cd $HOME/app
+if [ -f "$HOME/suap/.env/bin/activate" ] ; then
+    source $HOME/suap/.env/bin/activate
+    cd $HOME/suap
 fi
 
 #
-if [ -f "$HOME/app/.vscode/password.sh" ] ; then
-    source $HOME/app/.vscode/password.sh
+if [ -f "$HOME/suap/.vscode/password.sh" ] ; then
+    source $HOME/suap/.vscode/password.sh
 fi
 
 #

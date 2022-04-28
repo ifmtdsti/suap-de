@@ -8,13 +8,13 @@ ENV LANG=pt_BR.UTF-8
 ENV LANGUAGE=pt_BR:en
 ENV LC_ALL=pt_BR.UTF-8
 
-RUN locale-gen pt_BR.UTF-8 && groupadd -g 1000 suap && useradd -rm -d /opt/suap -s /bin/bash -g suap -G sudo -u 1000 suap && echo 'suap:suap' | chpasswd
+RUN locale-gen pt_BR.UTF-8 && groupadd -g 1000 suap && useradd -rm -d /app -s /bin/bash -g suap -G sudo -u 1000 suap && echo 'suap:suap' | chpasswd
 
 RUN service ssh start
 
 USER suap
 
-WORKDIR /opt/suap
+WORKDIR /app
 
 ADD --chown=suap:suap lib/bash_aliases.sh     .bash_aliases
 ADD --chown=suap:suap lib/bashrc.sh           .bashrc

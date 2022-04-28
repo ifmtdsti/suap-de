@@ -6,11 +6,14 @@ fi
 
 PID_FILE=/tmp/suap.pid
 
-if [ ! -f $PID_FILE ] ; then
-    echo "gunicorn não esta esta sendo executado"
-    exit 0
+if [ -f $PID_FILE ] ; then
+
+    pkill -F $PID_FILE
+
+    rm -fr $PID_FILE
+
+else
+
+    echo "gunicorn não esta sendo executado"
+
 fi
-
-pkill -F $PID_FILE
-
-rm -fr $PID_FILE

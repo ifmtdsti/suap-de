@@ -11,9 +11,9 @@ services:
     image: ifmt/suap-app
     restart: unless-stopped
     volumes:
-      - app_app:/opt/suap/app
-      - app_con:/opt/suap/.config
-      - app_loc:/opt/suap/.local
+      - app_app:/app/suap
+      - app_con:/app/.config
+      - app_loc:/app/.local
     ports:
       - '8000:8000'
       - '8022:22'

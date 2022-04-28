@@ -82,7 +82,7 @@ install-pip: install-pip-1 install-pip-2 install-pip-3
 
 install-pip-1:
 
-	@-${SSH} "bash -l -c 'cd /opt/suap/app && python3 -m venv .env'"
+	@-${SSH} "bash -l -c 'cd /app/suap && python3 -m venv .env'"
 
 install-pip-2:
 
@@ -94,7 +94,7 @@ install-pip-3:
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'cd /opt/suap/app && deactivate && rm -fr .env/*'"
+	@-${SSH} "bash -l -c 'cd /app/suap && deactivate && rm -fr .env/*'"
 
 manage-migrate:
 
