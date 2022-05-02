@@ -2,7 +2,7 @@
 .gitignore
 
 env/
-vol/
+var/
 
 .env-dba
 .env-git

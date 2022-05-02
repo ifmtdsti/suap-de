@@ -15,7 +15,7 @@ restart: stop start
 
 init:
 
-	@-bash init.sh
+	@-bash bin/init.sh
 
 shell:
 

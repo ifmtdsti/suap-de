@@ -99,7 +99,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/vol/con
+      device: ${PWD}/var/con
       o: bind
 
   app_loc:
@@ -107,7 +107,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PWD}/vol/loc
+      device: ${PWD}/var/loc
       o: bind
 
   dba:

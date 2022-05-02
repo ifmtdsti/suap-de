@@ -10,6 +10,14 @@ fi
 
 #
 
+if [ ! -x "$(command -v docker-compose)" ]; then
+
+    echo "ERRO: Você precisa instalar o docker-compose"
+
+fi
+
+#
+
 if [ ! -x "$(command -v sshpass)" ]; then
 
     echo "ERRO: Você precisa instalar o sshpass"
@@ -48,41 +56,39 @@ fi
 #
 
 mkdir -p ${PWD}/lib/ssh/
-mkdir -p ${PWD}/vol/con/
-mkdir -p ${PWD}/vol/loc/
-
-#
+mkdir -p ${PWD}/var/con/
+mkdir -p ${PWD}/var/loc/
 
 #
 
 if [ ! -f ".env-dba" ] ; then
 
-    cp ${PWD}/lib/env/dba.txt .env-dba
+    cp ${PWD}/lib/env/dba.txt ${PWD}/.env-dba
 
 fi
 
 if [ ! -f ".env-red" ] ; then
 
-    cp ${PWD}/lib/env/red.txt .env-red
+    cp ${PWD}/lib/env/red.txt ${PWD}/.env-red
 
 fi
 
 if [ ! -f ".env-sql" ] ; then
 
-    cp ${PWD}/lib/env/sql.txt .env-sql
+    cp ${PWD}/lib/env/sql.txt ${PWD}/.env-sql
 
 fi
 
 #
 
-cp ${HOME}/.ssh/id_rsa     ${PWD}/lib/ssh/id_rsa
-cp ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/id_rsa.pub
-cp ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/authorized_keys
+install -m 600 ${HOME}/.ssh/id_rsa     ${PWD}/lib/ssh/id_rsa
+install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/id_rsa.pub
+install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/authorized_keys
 
 #
 
-install -D ${PWD}/lib/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
-install -D ${PWD}/lib/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
+install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
+install -m 755 ${PWD}/lib/bin/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
 
 #
 
@@ -91,6 +97,8 @@ if [ ! -f .env ] ; then
     echo "BASE=${HOME}/.opt/suap" > .env
 
 fi
+
+#
 
 . .env
 
