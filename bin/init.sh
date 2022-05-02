@@ -87,6 +87,8 @@ install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/authorized_keys
 
 #
 
+mkdir -p ../suap/.local/bin
+
 install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
 install -m 755 ${PWD}/lib/bin/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
 
