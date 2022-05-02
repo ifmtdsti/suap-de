@@ -96,8 +96,14 @@ fi
 
 if [ ! -d "${BASE}" ] ; then
 
-    mkdir ${BASE}
+    sudo mkdir -p ${BASE}/{dba,red,sql}
+
+    sudo chmod -R 775 $BASE
+
+    sudo chown 5050:5050 ${BASE}/dba
 
 fi
+
+#
 
 ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
