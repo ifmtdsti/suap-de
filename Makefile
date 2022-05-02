@@ -7,54 +7,19 @@ endif
 
 all:
 
-init: init-1 init-2 init-3 init-4 init-5 init-6
-
-start: clear-knownhost start-compose
+start: init start-compose
 
 stop: stop-compose
 
 restart: stop start
 
+init:
+
+	@-bash init.sh
+
 shell:
 
 	@-${SSH}
-
-init-1:
-
-	@-if [ ! -d "../suap" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap; fi
-	@-if [ ! -d "../cron" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-de-cron.git ../cron; fi
-	@-if [ ! -d "../safe" ] ; then git clone git@gitlab.ifmt.edu.br:csn/suap-de-safe.git ../safe; fi
-
-init-2:
-
-	@-mkdir -p lib/ssh/
-	@-mkdir -p vol/con/
-	@-mkdir -p vol/loc/
-
-init-3:
-
-	@-if [ ! -f .env ] ; then echo "BASE=${HOME}/.opt/suap" > .env; fi
-
-init-4:
-
-	@-if [ ! -f ".env-dba" ] ; then cp lib/env/dba.txt .env-dba; fi
-	@-if [ ! -f ".env-red" ] ; then cp lib/env/red.txt .env-red; fi
-	@-if [ ! -f ".env-sql" ] ; then cp lib/env/sql.txt .env-sql; fi
-
-init-5:
-
-	@-cp ${HOME}/.ssh/id_rsa     lib/ssh/id_rsa
-	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/id_rsa.pub
-	@-cp ${HOME}/.ssh/id_rsa.pub lib/ssh/authorized_keys
-
-init-6:
-
-	@-install -D lib/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
-	@-install -D lib/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
-
-clear-knownhost:
-
-	@-ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "[localhost]:8022" >/dev/null 2>&1
 
 start-compose: pull-docker
 

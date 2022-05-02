@@ -30,6 +30,6 @@ USER root
 
 RUN mkdir -p /var/log/supervisor
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY lib/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD [ "/usr/bin/supervisord" ]
