@@ -51,11 +51,11 @@ install-pip-1:
 
 install-pip-2:
 
-	@-${SSH} "bash -l -c 'python -m pip install --upgrade pip'"
+	@-${SSH} "bash -l -c 'python3 -m pip install -U pip'"
 
 install-pip-3:
 
-	@-${SSH} "bash -l -c 'python -m pip install wheel'"
+	@-${SSH} "bash -l -c 'python3 -m pip install wheel'"
 
 uninstall-pip:
 
