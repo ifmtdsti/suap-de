@@ -1,8 +1,9 @@
+APP=suap
 
 ifeq ($(OS), Windows_NT)
-    SSH=ssh -p 8022 suap@localhost
+    SSH=ssh -p 8022 ${APP}@localhost
 else
-    SSH=sshpass -psuap ssh -p 8022 suap@localhost
+    SSH=sshpass -p${APP} ssh -p 8022 ${APP}@localhost
 endif
 
 all:

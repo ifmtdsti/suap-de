@@ -12,8 +12,8 @@ services:
     restart: unless-stopped
     volumes:
       - app_app:/app/suap
-      - app_con:/app/.config
-      - app_loc:/app/.local
+      - app_con:/app/.config/code-server
+      - app_loc:/app/.local/share/code-server
     ports:
       - '8000:8000'
       - '8022:22'
