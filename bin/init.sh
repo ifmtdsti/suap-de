@@ -93,6 +93,7 @@ install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ../suap/.local/bin/start-gunicor
 install -m 755 ${PWD}/lib/bin/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
 install -m 755 ${PWD}/lib/bin/install-pip.sh    ../suap/.local/bin/install-pip.sh
 install -m 755 ${PWD}/lib/bin/uninstall-pip.sh  ../suap/.local/bin/uninstall-pip.sh
+install -m 755 ${PWD}/lib/bin/refresh-app.sh    ../suap/.local/bin/refresh-app.sh
 
 #
 

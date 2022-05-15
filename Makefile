@@ -42,39 +42,17 @@ stop-docker:
 
 	@sudo service docker stop
 
-install-pip: install-pip-1 install-pip-2 install-pip-3
+install-pip:
 
-	@-${SSH} "bash -l -c 'python -m pip install -r requirements/custom.txt'"
-
-install-pip-1:
-
-	@-${SSH} "bash -l -c 'cd /app/suap && python3 -m venv .env'"
-
-install-pip-2:
-
-	@-${SSH} "bash -l -c 'python3 -m pip install -U pip'"
-
-install-pip-3:
-
-	@-${SSH} "bash -l -c 'python3 -m pip install wheel'"
+	@-${SSH} "bash -l -c '.local/bin/install-pip.sh'"
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c 'cd /app/suap && deactivate && rm -fr .env/*'"
+	@-${SSH} "bash -l -c '.local/bin/uninstall-pip.sh'"
 
-manage-migrate:
+refresh-app:
 
-	@-${SSH} "bash -l -c 'python manage.py migrate'"
-
-manage-sync:
-
-	@-${SSH} "bash -l -c 'python manage.py sync'"
-
-manage-password:
-
-	@-${SSH} "bash -l -c 'python manage.py set_passwords_to 123147'"
-
-restart-gunicorn: stop-gunicorn start-gunicorn
+	@-${SSH} "bash -l -c '.local/bin/refresh-app.sh'"
 
 start-gunicorn:
 
@@ -83,3 +61,5 @@ start-gunicorn:
 stop-gunicorn:
 
 	@-${SSH} "bash -l -c '.local/bin/stop-gunicorn.sh'"
+
+restart-gunicorn: stop-gunicorn start-gunicorn
