@@ -44,22 +44,22 @@ stop-docker:
 
 install-pip:
 
-	@-${SSH} "bash -l -c '.local/bin/install-pip.sh'"
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/install-pip.sh'"
 
 uninstall-pip:
 
-	@-${SSH} "bash -l -c '.local/bin/uninstall-pip.sh'"
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/uninstall-pip.sh'"
 
 refresh-app:
 
-	@-${SSH} "bash -l -c '.local/bin/refresh-app.sh'"
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/refresh-app.sh'"
 
 start-gunicorn:
 
-	@-${SSH} "bash -l -c '.local/bin/start-gunicorn.sh'"
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/start-gunicorn.sh'"
 
 stop-gunicorn:
 
-	@-${SSH} "bash -l -c '.local/bin/stop-gunicorn.sh'"
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/stop-gunicorn.sh'"
 
 restart-gunicorn: stop-gunicorn start-gunicorn
