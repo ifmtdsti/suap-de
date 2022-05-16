@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DIR1="../suap"
+DIR2="../cron"
+DIR3="../safe"
+
 #
 
 if [ ! -x "$(command -v docker)" ]; then
@@ -35,21 +39,21 @@ fi
 
 #
 
-if [ ! -d "../suap" ] ; then
+if [ ! -d "${DIR1}" ] ; then
 
-    git clone git@gitlab.ifmt.edu.br:csn/suap.git ../suap
-
-fi
-
-if [ ! -d "../cron" ] ; then
-
-    git clone git@gitlab.ifmt.edu.br:csn/suap-de-cron.git ../cron
+    git clone git@gitlab.ifmt.edu.br:csn/suap.git ${DIR1}
 
 fi
 
-if [ ! -d "../safe" ] ; then
+if [ ! -d "${DIR2}" ] ; then
 
-    git clone git@gitlab.ifmt.edu.br:csn/suap-de-safe.git ../safe
+    git clone git@gitlab.ifmt.edu.br:csn/suap-de-cron.git ${DIR2}
+
+fi
+
+if [ ! -d "${DIR3}" ] ; then
+
+    git clone git@gitlab.ifmt.edu.br:csn/suap-de-safe.git ${DIR3}
 
 fi
 
@@ -87,13 +91,13 @@ install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/authorized_keys
 
 #
 
-mkdir -p ../suap/.local/bin
+mkdir -p ${DIR1}/.local/bin
 
-install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ../suap/.local/bin/start-gunicorn.sh
-install -m 755 ${PWD}/lib/bin/stop-gunicorn.sh  ../suap/.local/bin/stop-gunicorn.sh
-install -m 755 ${PWD}/lib/bin/install-pip.sh    ../suap/.local/bin/install-pip.sh
-install -m 755 ${PWD}/lib/bin/uninstall-pip.sh  ../suap/.local/bin/uninstall-pip.sh
-install -m 755 ${PWD}/lib/bin/refresh-app.sh    ../suap/.local/bin/refresh-app.sh
+install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ${DIR1}/.local/bin/start-gunicorn.sh
+install -m 755 ${PWD}/lib/bin/stop-gunicorn.sh  ${DIR1}/.local/bin/stop-gunicorn.sh
+install -m 755 ${PWD}/lib/bin/install-pip.sh    ${DIR1}/.local/bin/install-pip.sh
+install -m 755 ${PWD}/lib/bin/uninstall-pip.sh  ${DIR1}/.local/bin/uninstall-pip.sh
+install -m 755 ${PWD}/lib/bin/synchronize.sh    ${DIR1}/.local/bin/synchronize.sh
 
 #
 

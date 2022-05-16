@@ -1,6 +1,6 @@
-# suap-pc
+# SUAP-DE
 
-Ambiente de desenvolvimento SUAP baseado em Docker para o PyCharm ou VsCode
+Ambiente de desenvolvimento SUAP baseado em Docker com VS-Code
 
 ## Requisitos
 
@@ -47,8 +47,7 @@ git fetch --all --prune && git pull origin master
 | shell           | acessa o container via ssh                             |
 | start-gunicorn  | inicia a aplicação suap via gunicorn                   |
 | stop-gunicorn   | para a aplicação suap via gunicorn                     |
-| manage-sync     | execute "manage.py sync"                               |
-| manage-password | executa "manage.py set_passwords_to"                   |
+| synchronize     | sicroniza a aplicacao                                  |
 
 ## Configurações
 

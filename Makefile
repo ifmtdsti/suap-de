@@ -50,9 +50,9 @@ uninstall-pip:
 
 	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/uninstall-pip.sh'"
 
-refresh-app:
+synchronize:
 
-	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/refresh-app.sh'"
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/synchronize.sh'"
 
 start-gunicorn:
 
