@@ -10,8 +10,6 @@ ENV LC_ALL=pt_BR.UTF-8
 
 RUN locale-gen pt_BR.UTF-8 && groupadd -g 1000 suap && useradd -rm -d /app -s /bin/bash -g suap -G sudo -u 1000 suap && echo 'suap:suap' | chpasswd
 
-RUN service ssh start
-
 USER suap
 
 WORKDIR /app
@@ -27,6 +25,8 @@ RUN code-server --install-extension ms-python.python
 RUN code-server --install-extension ms-toolsai.jupyter
 
 USER root
+
+RUN service ssh start
 
 RUN mkdir -p /var/log/supervisor
 
