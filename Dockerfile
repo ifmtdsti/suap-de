@@ -1,6 +1,4 @@
-FROM ifmt/suap-os:latest
-
-ARG CACHE_BUST=1
+FROM ifmt/suap-vc:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -17,9 +15,6 @@ WORKDIR /app
 ADD --chown=suap:suap lib/bin/bash_aliases.sh .bash_aliases
 ADD --chown=suap:suap lib/bin/bashrc.sh       .bashrc
 ADD --chown=suap:suap lib/bin/profile.sh      .profile
-ADD --chown=suap:suap lib/ssh/id_rsa          .ssh/id_rsa
-ADD --chown=suap:suap lib/ssh/id_rsa.pub      .ssh/id_rsa.pub
-ADD --chown=suap:suap lib/ssh/authorized_keys .ssh/authorized_keys
 
 RUN code-server --install-extension ms-python.python
 RUN code-server --install-extension ms-toolsai.jupyter

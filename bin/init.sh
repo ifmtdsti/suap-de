@@ -59,9 +59,9 @@ fi
 
 #
 
-mkdir -p ${PWD}/lib/ssh/
 mkdir -p ${PWD}/var/con/
 mkdir -p ${PWD}/var/loc/
+mkdir -p ${PWD}/var/ssh/
 
 #
 
@@ -85,9 +85,9 @@ fi
 
 #
 
-install -m 600 ${HOME}/.ssh/id_rsa     ${PWD}/lib/ssh/id_rsa
-install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/id_rsa.pub
-install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/lib/ssh/authorized_keys
+install -m 600 ${HOME}/.ssh/id_rsa     ${PWD}/var/ssh/id_rsa
+install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/var/ssh/id_rsa.pub
+install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/var/ssh/authorized_keys
 
 #
 

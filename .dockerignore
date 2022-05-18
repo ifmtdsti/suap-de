@@ -2,17 +2,15 @@
 
 .git/
 
+bin/
 env/
 var/
 
-.env-dba
-.env-git
-.env-red
-.env-sql
+.env-*
 
 Dockerfile
 Makefile
 
-README.md
-
 docker-compose.yml
+
+README.md

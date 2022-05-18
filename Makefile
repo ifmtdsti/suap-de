@@ -24,7 +24,7 @@ shell:
 
 start-compose: pull-docker
 
-	@docker-compose up --build --detach --force-recreate --remove-orphans
+	@docker-compose up --build --detach --remove-orphans
 
 stop-compose:
 
@@ -32,7 +32,7 @@ stop-compose:
 
 pull-docker:
 
-	@docker pull ifmt/suap-os:latest
+	@docker pull ifmt/suap-vc:latest
 
 start-docker:
 

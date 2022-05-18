@@ -14,6 +14,7 @@ services:
       - app_app:/app/suap
       - app_con:/app/.config/code-server
       - app_loc:/app/.local/share/code-server
+      - app_ssh:/app/.ssh
     ports:
       - '8000:8000'
       - '8022:22'
@@ -108,6 +109,14 @@ volumes:
     driver_opts:
       type: none
       device: ${PWD}/var/loc
+      o: bind
+
+  app_ssh:
+    name: suap-app-ssh
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/var/ssh
       o: bind
 
   dba:
