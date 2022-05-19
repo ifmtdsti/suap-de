@@ -8,7 +8,7 @@ endif
 
 all:
 
-start: init start-compose
+start: start-compose
 
 stop: stop-compose
 
@@ -18,21 +18,21 @@ init:
 
 	@-bash bin/init.sh
 
+pull: init
+
+	@-docker pull ifmt/suap-vc:latest
+
 shell:
 
 	@-${SSH}
 
-start-compose: pull-docker
+start-compose: init pull
 
-	@docker-compose up --build --detach --remove-orphans
+	@-docker-compose up --build --detach --remove-orphans
 
 stop-compose:
 
-	@docker-compose down --remove-orphans --volumes
-
-pull-docker:
-
-	@docker pull ifmt/suap-vc:latest
+	@-docker-compose down --remove-orphans --volumes
 
 start-docker:
 
