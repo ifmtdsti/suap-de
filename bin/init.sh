@@ -114,7 +114,7 @@ install -m 755 ${PWD}/lib/bin/synchronize.sh    ${DIR1}/.local/bin/synchronize.s
 #
 
 mkdir -p ${PWD}/var/con/
-mkdir -p ${PWD}/var/loc/User/
+mkdir -p ${PWD}/var/loc/share/code-server/User/
 mkdir -p ${PWD}/var/ssh/
 
 #
@@ -131,7 +131,7 @@ fi
 #
 
 J1="${PWD}/lib/etc/settings.json"
-J2="${PWD}/var/loc/User/settings.json"
+J2="${PWD}/var/loc/share/code-server/User/settings.json"
 
 if [ ! -f "${J2}" ] ; then
 

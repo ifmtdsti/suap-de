@@ -12,8 +12,8 @@ services:
     restart: unless-stopped
     volumes:
       - app_app:/app/suap
-      - app_con:/app/.config/code-server
-      - app_loc:/app/.local/share/code-server
+      - app_con:/app/.config
+      - app_loc:/app/.local
       - app_ssh:/app/.ssh
     ports:
       - '8000:8000'
@@ -85,14 +85,6 @@ volumes:
     driver_opts:
       type: none
       device: ${PWD}/../suap
-      o: bind
-
-  app_env:
-    name: suap-app-env
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/env
       o: bind
 
   app_con:

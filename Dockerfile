@@ -25,12 +25,9 @@ ADD --chown=suap:suap lib/bin/bash_aliases.sh .bash_aliases
 ADD --chown=suap:suap lib/bin/bashrc.sh       .bashrc
 ADD --chown=suap:suap lib/bin/profile.sh      .profile
 
-RUN git config --global http.sslverify false && \
-    git config --global pull.rebase false && \
-    git config --global merge.ours.driver true
-
-RUN code-server --install-extension ms-python.python && \
-    code-server --install-extension ms-toolsai.jupyter
+RUN git config --global http.sslverify false
+RUN git config --global pull.rebase false
+RUN git config --global merge.ours.driver true
 
 USER root
 

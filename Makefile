@@ -28,7 +28,7 @@ shell:
 
 start-compose: init pull
 
-	@-docker-compose up --build --detach --remove-orphans
+	@-docker-compose up --build --detach --force-recreate --remove-orphans
 
 stop-compose:
 
