@@ -30,8 +30,7 @@ RUN git config --global http.sslverify false && \
     git config --global merge.ours.driver true
 
 RUN code-server --install-extension ms-python.python && \
-    code-server --install-extension ms-toolsai.jupyter && \
-    code-server --install-extension genuitecllc.codetogether
+    code-server --install-extension ms-toolsai.jupyter
 
 USER root
 

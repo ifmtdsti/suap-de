@@ -1,0 +1,15 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.startupEditor": "none",
+    "python.formatting.autopep8Args": [
+        "--max-line-length=200"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.env": true,
+        "**/.gitlab": true,
+        "**/.local": true,
+        "**/.vscode": true,
+        "**/venv": true
+    }
+}

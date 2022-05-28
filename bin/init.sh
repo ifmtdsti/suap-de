@@ -59,9 +59,27 @@ fi
 
 #
 
-mkdir -p ${PWD}/var/con/
-mkdir -p ${PWD}/var/loc/
-mkdir -p ${PWD}/var/ssh/
+if [ ! -f .env ] ; then
+
+    echo "BASE=${HOME}/.opt/suap" > .env
+
+fi
+
+#
+
+. .env
+
+#
+
+if [ ! -d "${BASE}" ] ; then
+
+    sudo mkdir -p ${BASE}/{dba,red,sql}
+
+    sudo chmod -R 775 $BASE
+
+    sudo chown 5050:5050 ${BASE}/dba
+
+fi
 
 #
 
@@ -85,12 +103,6 @@ fi
 
 #
 
-install -m 600 ${HOME}/.ssh/id_rsa     ${PWD}/var/ssh/id_rsa
-install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/var/ssh/id_rsa.pub
-install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/var/ssh/authorized_keys
-
-#
-
 mkdir -p ${DIR1}/.local/bin
 
 install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ${DIR1}/.local/bin/start-gunicorn.sh
@@ -101,25 +113,37 @@ install -m 755 ${PWD}/lib/bin/synchronize.sh    ${DIR1}/.local/bin/synchronize.s
 
 #
 
-if [ ! -f .env ] ; then
+mkdir -p ${PWD}/var/con/
+mkdir -p ${PWD}/var/loc/User/
+mkdir -p ${PWD}/var/ssh/
 
-    echo "BASE=${HOME}/.opt/suap" > .env
+#
+
+J1="${PWD}/lib/etc/launch.json"
+J2="${DIR1}/.vscode/launch.json"
+
+if [ ! -f "${J2}" ] ; then
+
+    install -m 644 ${J1} ${J2}
 
 fi
 
 #
 
-. .env
+J1="${PWD}/lib/etc/settings.json"
+J2="${PWD}/var/loc/User/settings.json"
 
-if [ ! -d "${BASE}" ] ; then
+if [ ! -f "${J2}" ] ; then
 
-    sudo mkdir -p ${BASE}/{dba,red,sql}
-
-    sudo chmod -R 775 $BASE
-
-    sudo chown 5050:5050 ${BASE}/dba
+    install -m 644 ${J1} ${J2}
 
 fi
+
+#
+
+install -m 600 ${HOME}/.ssh/id_rsa     ${PWD}/var/ssh/id_rsa
+install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/var/ssh/id_rsa.pub
+install -m 600 ${HOME}/.ssh/id_rsa.pub ${PWD}/var/ssh/authorized_keys
 
 #
 
