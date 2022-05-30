@@ -105,8 +105,6 @@ fi
 
 mkdir -p ${DIR1}/.local/bin
 
-install -m 755 ${PWD}/lib/bin/start-gunicorn.sh ${DIR1}/.local/bin/start-gunicorn.sh
-install -m 755 ${PWD}/lib/bin/stop-gunicorn.sh  ${DIR1}/.local/bin/stop-gunicorn.sh
 install -m 755 ${PWD}/lib/bin/install-pip.sh    ${DIR1}/.local/bin/install-pip.sh
 install -m 755 ${PWD}/lib/bin/uninstall-pip.sh  ${DIR1}/.local/bin/uninstall-pip.sh
 install -m 755 ${PWD}/lib/bin/synchronize.sh    ${DIR1}/.local/bin/synchronize.sh
