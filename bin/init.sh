@@ -9,6 +9,7 @@ DIR3="../safe"
 if [ ! -x "$(command -v docker)" ]; then
 
     echo "ERRO: Você precisa instalar o docker"
+    exit 1
 
 fi
 
@@ -17,6 +18,7 @@ fi
 if [ ! -x "$(command -v docker-compose)" ]; then
 
     echo "ERRO: Você precisa instalar o docker-compose"
+    exit 1
 
 fi
 
@@ -25,6 +27,7 @@ fi
 if [ ! -x "$(command -v sshpass)" ]; then
 
     echo "ERRO: Você precisa instalar o sshpass"
+    exit 1
 
 fi
 
