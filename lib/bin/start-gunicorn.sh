@@ -1,24 +1,24 @@
 #!/bin/bash
 
+set -e
+
 if [ "${HOSTNAME}" != "app" ] ; then
 
-    exit 0
+    echo "script só pode ser dentro do container"
+    exit 1
 
 fi
 
-set -e
-
-PID_FILE=/tmp/suap.pid
+PID_FILE=/app/suap/deploy/media/tmp/suap.pid
 
 if [ -f ${PID_FILE} ] ; then
 
     echo "gunicorn já esta sendo executado"
-
-    exit 0
+    exit 1
 
 fi
 
-LOG_FILE=deploy/logs/gunicorn/gunicorn.log
+LOG_FILE=/app/suap/deploy/logs/gunicorn/gunicorn.log
 
 LOG_DIR=$(dirname ${LOG_FILE})
 
@@ -26,4 +26,4 @@ test -d ${LOG_DIR} || mkdir -p ${LOG_DIR}
 
 WORKERS=$(($(nproc)+1))
 
-gunicorn suap.wsgi:application --bind=0.0.0.0:8000 --workers=${WORKERS} --timeout=1800 --pid=${PID_FILE} --log-file=${LOG_FILE} --daemon >> ${LOG_FILE}
+gunicorn suap.wsgi:application -b 0.0.0.0:8000 -w ${WORKERS} -t 360 --pid=${PID_FILE} --log-file=${LOG_FILE} --daemon >> ${LOG_FILE}

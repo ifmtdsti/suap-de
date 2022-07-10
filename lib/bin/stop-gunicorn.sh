@@ -1,18 +1,20 @@
 #!/bin/bash
 
+set -e
+
 if [ "${HOSTNAME}" != "app" ] ; then
 
-    exit 0
+    echo "script só pode ser dentro do container"
+    exit 1
 
 fi
 
-set -e
-
-PID_FILE=/tmp/suap.pid
+PID_FILE=/app/suap/deploy/media/tmp/suap.pid
 
 if [ ! -f ${PID_FILE} ] ; then
 
     echo "gunicorn não esta sendo executado"
+    exit 1
 
 fi
 
