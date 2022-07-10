@@ -15,7 +15,8 @@ RUN service ssh start
 
 RUN mkdir -p /var/log/supervisor
 
-COPY lib/etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY lib/etc/suap-de.conf /etc/supervisor/conf.d/suap-de.conf
+COPY lib/etc/tasks /etc/cron.d/tasks
 
 USER suap
 

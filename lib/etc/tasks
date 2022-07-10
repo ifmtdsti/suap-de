@@ -1,0 +1,7 @@
+#
+0 * * * * suap /usr/sbin/tmpreaper 1d /apt/suap/deploy/media/tmp/ --protect '*.rst' --showdeleted >> /app/suap/deploy/logs/cron/tmpreaper1.log
+#
+
+#
+0 * * * * suap /usr/sbin/tmpreaper 1d /apt/suap/deploy/sessions/  --protect '*.rst' --showdeleted >> /app/suap/deploy/logs/cron/tmpreaper2.log
+#
