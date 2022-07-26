@@ -86,21 +86,27 @@ fi
 
 #
 
+mkdir -p ${PWD}/var/con/
+mkdir -p ${PWD}/var/loc/share/code-server/User/
+mkdir -p ${PWD}/var/ssh/
+
+#
+
 if [ ! -f ".env-dba" ] ; then
 
-    cp ${PWD}/lib/env/dba.txt ${PWD}/.env-dba
+    cp ${PWD}/lib/etc/dba.txt ${PWD}/.env-dba
 
 fi
 
 if [ ! -f ".env-red" ] ; then
 
-    cp ${PWD}/lib/env/red.txt ${PWD}/.env-red
+    cp ${PWD}/lib/etc/red.txt ${PWD}/.env-red
 
 fi
 
 if [ ! -f ".env-sql" ] ; then
 
-    cp ${PWD}/lib/env/sql.txt ${PWD}/.env-sql
+    cp ${PWD}/lib/etc/sql.txt ${PWD}/.env-sql
 
 fi
 
@@ -115,14 +121,19 @@ install -m 755 ${PWD}/lib/bin/synchronize.sh    ${DIR1}/.local/bin/synchronize.s
 
 #
 
-mkdir -p ${PWD}/var/con/
-mkdir -p ${PWD}/var/loc/share/code-server/User/
-mkdir -p ${PWD}/var/ssh/
+J1="${PWD}/lib/etc/launch.json"
+J2="${DIR1}/.vscode/launch.json"
+
+if [ ! -f "${J2}" ] ; then
+
+    install -m 644 ${J1} ${J2}
+
+fi
 
 #
 
-J1="${PWD}/lib/etc/launch.json"
-J2="${DIR1}/.vscode/launch.json"
+J1="${PWD}/lib/etc/password.txt"
+J2="${DIR1}/.vscode/password.sh"
 
 if [ ! -f "${J2}" ] ; then
 

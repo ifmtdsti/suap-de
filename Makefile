@@ -62,4 +62,6 @@ stop-gunicorn:
 
 	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/stop-gunicorn.sh'"
 
-restart-gunicorn: stop-gunicorn start-gunicorn
+install-vcext:
+
+	@-${SSH} "bash -l -c '/app/${APP}/.local/bin/install-vcext.sh'"
