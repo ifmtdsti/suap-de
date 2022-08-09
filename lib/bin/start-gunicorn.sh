@@ -26,4 +26,4 @@ test -d ${LOG_DIR} || mkdir -p ${LOG_DIR}
 
 WORKERS=$(($(nproc)+1))
 
-gunicorn suap.wsgi:application -b 0.0.0.0:8000 -w ${WORKERS} -t 360 --pid=${PID_FILE} --log-file=${LOG_FILE} --daemon >> ${LOG_FILE}
+gunicorn suap.wsgi:application -b 0.0.0.0:8000 -w ${WORKERS} -t 360 --pid=${PID_FILE} --capture-output --log-level=critical --log-file=${LOG_FILE} --daemon
