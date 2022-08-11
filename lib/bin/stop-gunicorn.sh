@@ -9,7 +9,7 @@ if [ "${HOSTNAME}" != "app" ] ; then
 
 fi
 
-PID_FILE=/app/suap/deploy/media/tmp/suap.pid
+PID_FILE=/tmp/suap.pid
 
 if [ ! -f ${PID_FILE} ] ; then
 
