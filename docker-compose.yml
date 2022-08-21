@@ -31,7 +31,7 @@ services:
   dba:
     hostname: dba
     container_name: suap-dba
-    image: dpage/pgadmin4:6.11
+    image: dpage/pgadmin4:6.12
     restart: unless-stopped
     volumes:
       - dba:/var/lib/pgadmin
@@ -46,7 +46,7 @@ services:
   red:
     hostname: red
     container_name: suap-red
-    image: bitnami/redis:6.0.16
+    image: bitnami/redis:6.2.7
     restart: unless-stopped
     volumes:
       - red:/bitnami/redis/data
