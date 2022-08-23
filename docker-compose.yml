@@ -11,7 +11,7 @@ services:
     image: ifmt/suap-app
     restart: unless-stopped
     volumes:
-      - app_app:/app/suap
+      - app_src:/app/suap
       - app_con:/app/.config
       - app_loc:/app/.local
       - app_ssh:/app/.ssh
@@ -79,8 +79,8 @@ networks:
 
 volumes:
 
-  app_app:
-    name: suap-app-app
+  app_src:
+    name: suap-app-src
     driver: local
     driver_opts:
       type: none
