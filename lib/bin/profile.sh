@@ -10,29 +10,29 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 #
-if [ -d "$HOME/suap/.local/bin" ] ; then
+if [ -d "$HOME/$USER/.local/bin" ] ; then
 
-    PATH="$HOME/suap/.local/bin:$PATH"
-
-fi
-
-#
-if [ -f "$HOME/suap/.vscode/password.sh" ] ; then
-
-    source $HOME/suap/.vscode/password.sh
+    PATH="$HOME/$USER/.local/bin:$PATH"
 
 fi
 
 #
-if [ -f "$HOME/suap/.env/bin/activate" ] ; then
+if [ -f "$HOME/$USER/.vscode/password.sh" ] ; then
 
-    source $HOME/suap/.env/bin/activate
-
-    cd $HOME/suap
+    source $HOME/$USER/.vscode/password.sh
 
 fi
 
 #
-export PGHOST=suap-sql
+if [ -f "$HOME/$USER/.env/bin/activate" ] ; then
+
+    source $HOME/$USER/.env/bin/activate
+
+    cd $HOME/$USER
+
+fi
+
+#
+export PGHOST=$USER-sql
 export PGUSER=postgres
 export PGPASSWORD=postgres
