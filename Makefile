@@ -20,7 +20,7 @@ init:
 
 pull: init
 
-	@-docker pull ifmt/suap-vc:latest
+	@-docker pull ifmt/de-suap:latest
 
 shell:
 
