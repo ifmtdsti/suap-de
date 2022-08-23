@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python -m venv /app/$USER/.env
+virtualenv -p python3 /app/$USER/.env
 
 source /app/$USER/.env/bin/activate
 
