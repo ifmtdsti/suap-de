@@ -55,6 +55,8 @@ services:
       - net
     env_file:
       - .env-red
+    profiles:
+      - redis
 
   dba:
     hostname: dba
@@ -70,6 +72,8 @@ services:
       - net
     env_file:
       - .env-dba
+    profiles:
+      - pgadmin
 
   moo:
     hostname: moo
@@ -85,6 +89,8 @@ services:
       - net
     env_file:
       - .env-moo
+    profiles:
+      - moodle
 
 networks:
 
