@@ -28,6 +28,20 @@ services:
       - red
       - sql
 
+  sql:
+    hostname: sql
+    container_name: suap-sql
+    image: bitnami/postgresql:12
+    restart: unless-stopped
+    volumes:
+      - sql:/bitnami/postgresql
+    ports:
+      - '5432:5432'
+    networks:
+      - net
+    env_file:
+      - .env-sql
+
   dba:
     hostname: dba
     container_name: suap-dba
@@ -49,7 +63,7 @@ services:
     image: bitnami/redis:6.2.7
     restart: unless-stopped
     volumes:
-      - red:/bitnami/redis/data
+      - red:/bitnami/redis
     ports:
       - '6379:6379'
     networks:
@@ -57,19 +71,20 @@ services:
     env_file:
       - .env-red
 
-  sql:
-    hostname: sql
-    container_name: suap-sql
-    image: bitnami/postgresql:12
+  moo:
+    hostname: moo
+    container_name: suap-moo
+    image: bitnami/moodle:3.11.9
     restart: unless-stopped
     volumes:
-      - sql:/bitnami/postgresql
+      - moo:/bitnami/moodle
     ports:
-      - 5432:5432
+      - '9080:8080'
+      - '9443:8443'
     networks:
       - net
     env_file:
-      - .env-sql
+      - .env-moo
 
 networks:
 
@@ -111,6 +126,14 @@ volumes:
       device: ${PWD}/var/ssh
       o: bind
 
+  sql:
+    name: suap-sql
+    driver: local
+    driver_opts:
+      type: none
+      device: ${BASE}/sql
+      o: bind
+
   dba:
     name: suap-dba
     driver: local
@@ -127,10 +150,10 @@ volumes:
       device: ${BASE}/red
       o: bind
 
-  sql:
-    name: suap-sql
+  moo:
+    name: suap-moo
     driver: local
     driver_opts:
       type: none
-      device: ${BASE}/sql
+      device: ${BASE}/moo
       o: bind

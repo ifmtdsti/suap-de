@@ -78,7 +78,7 @@ fi
 
 if [ ! -d "${BASE}" ] ; then
 
-    sudo mkdir -p ${BASE}/{dba,red,sql}
+    sudo mkdir -p ${BASE}/{dba,red,sql,moo}
 
     sudo chmod -R 775 $BASE
 
@@ -97,6 +97,12 @@ mkdir -p ${PWD}/var/ssh/
 if [ ! -f ".env-dba" ] ; then
 
     cp ${PWD}/lib/etc/-dba.txt ${PWD}/.env-dba
+
+fi
+
+if [ ! -f ".env-moo" ] ; then
+
+    cp ${PWD}/lib/etc/-moo.txt ${PWD}/.env-moo
 
 fi
 
