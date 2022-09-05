@@ -24,7 +24,6 @@ services:
     env_file:
       - .env-dba
     depends_on:
-      - dba
       - red
       - sql
 
