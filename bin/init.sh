@@ -78,7 +78,7 @@ fi
 
 if [ ! -d "${BASE}" ] ; then
 
-    sudo mkdir -p ${BASE}/{dba,red,sql,moo}
+    sudo mkdir -p ${BASE}/{dba,moo,red,sql}
 
     sudo chmod -R 775 $BASE
 
