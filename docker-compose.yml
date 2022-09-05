@@ -42,21 +42,6 @@ services:
     env_file:
       - .env-sql
 
-  dba:
-    hostname: dba
-    container_name: suap-dba
-    image: dpage/pgadmin4:6.12
-    restart: unless-stopped
-    volumes:
-      - dba:/var/lib/pgadmin
-    ports:
-      - '8443:443'
-      - '8480:80'
-    networks:
-      - net
-    env_file:
-      - .env-dba
-
   red:
     hostname: red
     container_name: suap-red
@@ -71,6 +56,21 @@ services:
     env_file:
       - .env-red
 
+  dba:
+    hostname: dba
+    container_name: suap-dba
+    image: dpage/pgadmin4:6.13
+    restart: unless-stopped
+    volumes:
+      - dba:/var/lib/pgadmin
+    ports:
+      - '8480:80'
+      - '8481:443'
+    networks:
+      - net
+    env_file:
+      - .env-dba
+
   moo:
     hostname: moo
     container_name: suap-moo
@@ -79,8 +79,8 @@ services:
     volumes:
       - moo:/bitnami/moodle
     ports:
-      - '9080:8080'
-      - '9443:8443'
+      - '8180:8080'
+      - '8181:8443'
     networks:
       - net
     env_file:
@@ -134,20 +134,20 @@ volumes:
       device: ${BASE}/sql
       o: bind
 
-  dba:
-    name: suap-dba
-    driver: local
-    driver_opts:
-      type: none
-      device: ${BASE}/dba
-      o: bind
-
   red:
     name: suap-red
     driver: local
     driver_opts:
       type: none
       device: ${BASE}/red
+      o: bind
+
+  dba:
+    name: suap-dba
+    driver: local
+    driver_opts:
+      type: none
+      device: ${BASE}/dba
       o: bind
 
   moo:
