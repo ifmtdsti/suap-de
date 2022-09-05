@@ -55,8 +55,6 @@ services:
       - net
     env_file:
       - .env-red
-    profiles:
-      - redis
 
   dba:
     hostname: dba
