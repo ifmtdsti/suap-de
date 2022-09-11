@@ -11,5 +11,6 @@
         "**/.local": true,
         "**/.vscode": true,
         "**/venv": true
-    }
+    },
+    "git.mergeEditor": false
 }
