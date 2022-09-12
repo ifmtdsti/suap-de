@@ -3,4 +3,4 @@
 cd /app/$USER
 
 python manage.py sync
-python manage.py set_passwords_to 123147
+python manage.py set_passwords_to $PASSWORD
