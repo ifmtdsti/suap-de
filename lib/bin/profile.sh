@@ -10,6 +10,12 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 #
+export PGHOST=$USER-sql
+export PGUSER=postgres
+export PGPASSWORD=postgres
+export PASSWORD=123147
+
+#
 if [ -d "$HOME/$USER/.local/bin" ] ; then
 
     PATH="$HOME/$USER/.local/bin:$PATH"
@@ -31,8 +37,3 @@ if [ -f "$HOME/$USER/.env/bin/activate" ] ; then
     cd $HOME/$USER
 
 fi
-
-#
-export PGHOST=$USER-sql
-export PGUSER=postgres
-export PGPASSWORD=postgres

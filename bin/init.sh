@@ -148,17 +148,6 @@ fi
 
 #
 
-J1="${PWD}/lib/etc/password.txt"
-J2="${DIR1}/.vscode/password.sh"
-
-if [ ! -f "${J2}" ] ; then
-
-    install -m 644 ${J1} ${J2}
-
-fi
-
-#
-
 J1="${PWD}/lib/etc/settings.txt"
 J2="${PWD}/var/loc/share/code-server/User/settings.json"
 

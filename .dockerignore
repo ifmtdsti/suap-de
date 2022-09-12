@@ -1,16 +1,13 @@
-.gitignore
-
 .git/
 
 bin/
 env/
 var/
 
-.env-*
+.env*
 
+.gitignore
 Dockerfile
 Makefile
-
-docker-compose.yml
-
 README.md
+docker-compose.yml
