@@ -22,7 +22,7 @@ services:
     networks:
       - net
     env_file:
-      - .env-dba
+      - .env-app
     depends_on:
       - red
       - sql

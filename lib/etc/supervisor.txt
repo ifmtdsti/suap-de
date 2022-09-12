@@ -6,12 +6,12 @@ command=/usr/sbin/cron -f
 autostart=true
 autorestart=true
 
-[program:sshd]
-command=/usr/sbin/sshd -D
+[program:vscode]
+command=/usr/bin/sudo -u suap -i code-server --host 0.0.0.0 --auth password --disable-update-check /app/suap
 autostart=true
 autorestart=true
 
-[program:vscode]
-command=/usr/bin/sudo -u suap -i code-server --host 0.0.0.0 --auth password --disable-update-check /app/suap
+[program:sshd]
+command=/usr/sbin/sshd -D
 autostart=true
 autorestart=true

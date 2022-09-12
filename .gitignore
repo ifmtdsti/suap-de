@@ -1,5 +1,6 @@
 #
 .env
+.env-app
 .env-dba
 .env-moo
 .env-red

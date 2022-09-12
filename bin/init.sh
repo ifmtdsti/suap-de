@@ -94,6 +94,12 @@ mkdir -p ${PWD}/var/ssh/
 
 #
 
+if [ ! -f ".env-app" ] ; then
+
+    cp ${PWD}/lib/etc/-app.txt ${PWD}/.env-app
+
+fi
+
 if [ ! -f ".env-dba" ] ; then
 
     cp ${PWD}/lib/etc/-dba.txt ${PWD}/.env-dba
