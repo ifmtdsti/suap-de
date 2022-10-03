@@ -137,6 +137,8 @@ install -m 755 ${PWD}/lib/bin/uninstall-pip.sh  ${DIR1}/.local/bin/uninstall-pip
 
 #
 
+mkdir -p ${DIR1}/.vscode
+
 J1="${PWD}/lib/etc/launch.txt"
 J2="${DIR1}/.vscode/launch.json"
 
