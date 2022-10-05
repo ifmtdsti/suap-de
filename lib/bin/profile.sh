@@ -13,7 +13,7 @@ fi
 export PGHOST=$USER-sql
 export PGUSER=postgres
 export PGPASSWORD=postgres
-export PASSWORD=123147
+export PASSWORD=vscode
 
 #
 if [ -d "$HOME/$USER/.local/bin" ] ; then
